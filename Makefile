@@ -4,11 +4,11 @@ SRCS = src/main.c
 
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -g#-Wall -Wextra -Werror
+CFLAGS = -g -lglfw -L"/Users/renebarbierperez/homebrew/Cellar/glfw/3.4/lib/" #-Wall -Wextra -Werror
 
 INC = inc/miniRT.h
 
-MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm
+MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 MLXLIB = lib/MLX42/build/libmlx42.a
 VECTOR = lib/vector/vector.a
 CC = gcc

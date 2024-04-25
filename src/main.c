@@ -18,7 +18,8 @@ int	vector_to_color(t_vec color)
 
 t_vec ray_color(t_vec ray)
 {
-    return (new_vector(0, 0, 0));
+	(void)ray;
+    return (new_vec(0, 0, 0));
 }
 
 t_vec	color_clamp(t_vec color)

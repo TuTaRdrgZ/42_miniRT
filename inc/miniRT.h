@@ -10,15 +10,20 @@
 
 typedef struct s_ray
 {
-	t_vec	origin;
+  // Punto de origen del rayo
+	t_point	origin;
+
+  // Dirección del rayo
 	t_vec	direction;
+
+  // Vector normal a la superficie impactada
 	t_vec	normal;
 }			t_ray;
 
 typedef struct s_camera
 {
   // Posición de la cámara en el espacio 3D
-  t_vec origin;
+  t_point origin;
 
   // Dirección hacia la que apunta la cámara
   t_vec direction;
@@ -38,6 +43,24 @@ typedef struct s_camera
   // Valor de apertura (para el desenfoque)
   float aperture;
 }			t_camera;
+
+typedef struct viewport
+{
+  float vp_width;
+  float vp_height;
+
+  // Distance between the camera and the vp
+  float focal_length;
+
+  t_vec u;
+  t_vec v;
+
+  t_vec pixel_delta_u;
+  t_vec pixel_delta_v;
+
+  t_point upper_left;
+  t_point pixel00;
+}			t_vp;
 
 typedef struct s_data {
     mlx_t *mlx;

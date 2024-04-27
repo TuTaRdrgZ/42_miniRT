@@ -5,8 +5,8 @@
 #include <math.h>
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/vector/vector.h"
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 400
+#define HEIGHT 225
 
 typedef struct s_ray
 {
@@ -15,6 +15,10 @@ typedef struct s_ray
 
   // Dirección del rayo
 	t_vec	direction;
+
+  int f_first;
+  double scalar;
+
 
   // Vector normal a la superficie impactada
 	t_vec	normal;
@@ -46,8 +50,8 @@ typedef struct s_camera
 
 typedef struct viewport
 {
-  float vp_width;
-  float vp_height;
+  double vp_width;
+  double vp_height;
 
   // Distance between the camera and the vp
   float focal_length;
@@ -59,7 +63,7 @@ typedef struct viewport
   t_vec pixel_delta_v;
 
   t_point upper_left;
-  t_point pixel00;
+  t_vec pixel00;
 }			t_vp;
 
 typedef struct s_data {
@@ -68,10 +72,15 @@ typedef struct s_data {
     t_vec *color;
     t_ray *ray;
     t_camera *camera;
+    t_vp *vp;
     int     width;
     int     height;
 }            t_data;
 
-void init_camera(t_camera *camera, t_vec origin, t_vec direction, t_vec up, float fov_h, float aspect_ratio);
+// void init_camera(t_camera *camera, t_vec origin, t_vec direction, t_vec up, float fov_h, float aspect_ratio);
+void camera_init(t_camera *camera);
+void data_init(t_data *data, int width, int height);
+t_point new_point(float x, float y, float z);
+void viewport_init(t_vp *vp, t_camera *camera);
 
 #endif

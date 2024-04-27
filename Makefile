@@ -1,6 +1,6 @@
 NAME = miniRT
 
-SRCS = src/main.c
+SRCS = src/main.c src/struct_init.c
 
 OBJS = $(SRCS:.c=.o)
 

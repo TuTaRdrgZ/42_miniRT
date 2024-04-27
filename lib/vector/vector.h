@@ -34,7 +34,7 @@ t_vec	abs_vec(t_vec color);
 
 double	length_vec(t_vec v1);
 double	length_sqrd(t_vec vector);
-void	print_vec(t_vec vector);
+void	print_vec(t_vec vector, char *name);
 
 bool	are_equal_vectors(t_vec a, t_vec b);
 

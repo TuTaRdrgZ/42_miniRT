@@ -1,7 +1,7 @@
 #include "vector.h"
 
 /*prints the vector values as XYZ*/
-void	print_vec(t_vec vector)
+void	print_vec(t_vec vector, char *name)
 {
-	printf("(%.5f|%.5f|%.5f)\n", vector.x, vector.y, vector.z);
+	printf("%s (%.4f|%.4f|%.4f)\n", name, vector.x, vector.y, vector.z);
 }

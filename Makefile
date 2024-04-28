@@ -11,6 +11,7 @@ INC = inc/miniRT.h
 MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm
 MLXLIB = lib/MLX42/build/libmlx42.a
 VECTOR = lib/vector/vector.a
+LIB = lib/
 CC = gcc
 
 %c.o: %.c 
@@ -19,6 +20,8 @@ CC = gcc
 all: $(NAME)
 
 $(NAME): $(OBJS) $(INC)
+	@make -C lib/vector
+	@make -C lib/libft/
 	$(CC) $(CFLAGS) $(OBJS) $(VECTOR) $(MLXLIB) $(MLXFLAGS) -o $(NAME)
 
 clean:

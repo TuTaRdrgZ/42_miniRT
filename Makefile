@@ -26,10 +26,13 @@ $(NAME): $(OBJS) $(INC)
 
 clean:
 	rm -f $(OBJS)
+	@make clean -C lib/libft
+	@make clean -C lib/vector
 
 fclean: clean
 	rm -f $(NAME)
-	make all
+	@make fclean -C lib/libft
+	@make fclean -C lib/vector
 
 re: fclean all
 

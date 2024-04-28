@@ -6,7 +6,7 @@
 /*   By: tuta <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:57:23 by tuta              #+#    #+#             */
-/*   Updated: 2024/04/29 00:28:10 by tuta             ###   ########.fr       */
+/*   Updated: 2024/04/29 00:46:35 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	check_type(/*t_data *data, */ char **matrix)
     else if (!ft_strncmp(matrix[0], "C", len))
     {
         printf("Hey found camera here\n"); // init_camera()
+        if (check_camera(matrix, arg_counter(matrix)))
+            return (KO);
     }
     else if (!ft_strncmp(matrix[0], "sp", len))
         printf("Hey found a sphere\n"); // init_obj(data, "sphere");

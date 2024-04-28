@@ -18,7 +18,7 @@ void    print_matrix_error(char **matrix, int arg)
 }
 
 // remember: i = -1; j = 0; c = -1;
-int check_point(char *s, int i, int j, int c)
+int check_dot(char *s, int i, int j, int c)
 {
 	while (s[++i])
 	{

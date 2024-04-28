@@ -11,7 +11,5 @@ int check_ambient(char **ambient, int argc/*, t_data *data*/)
        return (print_matrix_error(ambient, returnval), KO);
     if (check_rgb(ambient[2]))
         return (printf(RED"%s\n"RST, ambient[2]), KO);
-    // for(int i = 0; ambient[i]; i++)
-        // printf("line->%d |%s|\n", i, ambient[i]);
     return (OK);
 }

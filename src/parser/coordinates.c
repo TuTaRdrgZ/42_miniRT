@@ -10,7 +10,7 @@ int check_coordinates(char *str)
         return (printf("Malloc failed\n"), KO);
     if (arg_counter(commas) != 3)
         return (printf(RED"Error\n"RST"Invalid coordinates: %s\n", str),ft_free(commas), KO);
-    if (check_point(commas[0],-1,0,-1) || check_point(commas[1],-1, 0, -1) || check_point(commas[2], -1,0,-1))
+    if (check_dot(commas[0],-1,0,-1) || check_dot(commas[1],-1, 0, -1) || check_dot(commas[2], -1,0,-1))
         return (ft_free(commas), KO);
     i = -1;
     while (++i <= 3)

@@ -1,14 +1,23 @@
 NAME = miniRT
 
-SRCS = src/main.c
+SRCS = src/parser/ambient.c \
+	   src/parser/camera.c \
+	   src/parser/checkfile.c \
+	   src/parser/light.c \
+	   src/parser/coordinates.c \
+	   src/parser/readfile.c \
+	   src/parser/utils.c \
+	   src/parser/utils2.c \
+	   src/parser/RGB.c
 
 OBJS = $(SRCS:.c=.o)
 
 CFLAGS = -g#-Wall -Wextra -Werror
 
-INC = inc/miniRT.h
+INC = inc/miniRT.h \
+	  # inc/parser.h
 
-MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm
+MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/
 MLXLIB = lib/MLX42/build/libmlx42.a
 VECTOR = lib/vector/vector.a
 LIB = lib/

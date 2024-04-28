@@ -6,7 +6,7 @@
 #    By: bautrodr <bautrodr@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/06 10:11:46 by bautrodr          #+#    #+#              #
-#    Updated: 2024/04/28 12:25:17 by tuta             ###   ########.fr        #
+#    Updated: 2024/04/29 00:59:26 by tuta             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS = ft_calloc.c \
 	   ft_toupper.c \
 	   ft_split.c \
 	   ft_itoa.c \
+	   ft_atof.c \
 	   ft_strmapi.c \
 	   ft_striteri.c \
 	   ft_putchar_fd.c \

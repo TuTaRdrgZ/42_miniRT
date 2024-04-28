@@ -21,5 +21,12 @@ int	print_error(char *error);
 int arg_counter(char **matrix);
 int check_ambient(char **ambient, int argc/*, t_data *data*/);
 char *ft_strtrimfree(char *str, char *s);
+void    print_matrix_error(char **matrix, int arg);
 
+int check_light(char **light, int argc);
+int check_rgb(char *str);
+int check_coordinates(char *str);
+int check_point(char *s, int i, int j, int c);
+int check_negative(char *str);
+int check_ratio(char *str);
 #endif

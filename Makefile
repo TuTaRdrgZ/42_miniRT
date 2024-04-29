@@ -9,13 +9,14 @@ SRCS = src/parser/ambient.c \
 	   src/parser/utils.c \
 	   src/parser/utils2.c \
 	   src/parser/RGB.c
+SRCS += src/struct_init.c
 
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -g#-Wall -Wextra -Werror
+CFLAGS = -Iinc/ -g -Wall -Wextra -Werror
 
 INC = inc/miniRT.h \
-	  # inc/parser.h
+	  inc/parser.h
 
 MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/
 MLXLIB = lib/MLX42/build/libmlx42.a

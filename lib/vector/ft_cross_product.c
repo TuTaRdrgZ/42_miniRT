@@ -2,7 +2,7 @@
 
 /*Cross product of two vectors returns normal vector. The absolute value
 of this vector is also the surface area of the two vectors.*/
-t_vec	cross_product(t_vec v1, t_vec v2)
+t_vec	cross_prod(t_vec v1, t_vec v2)
 {
 	t_vec	result;
 

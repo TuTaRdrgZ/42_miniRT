@@ -1,7 +1,7 @@
 #include "vector.h"
 
 /*Divides every vector coordinate by f. Checks for division by 0.*/
-t_vec	divide_vector_by_scalar(t_vec v1, double f)
+t_vec	div_vec_by_scal(t_vec v1, double f)
 {
 	t_vec	result;
 

@@ -52,10 +52,10 @@ void viewport_init(t_vp *vp, t_camera *camera)
 
     vp->u = new_vec(vp->vp_width, 0, 0);
     vp->v = new_vec(0, -vp->vp_height, 0);
-    printf("height: %.4f\n", vp->vp_height);
-    printf("width: %.4f\n", vp->vp_width);
-    print_vec(vp->v, "v");
-    print_vec(vp->u, "u");
+    // printf("height: %.4f\n", vp->vp_height);
+    // printf("width: %.4f\n", vp->vp_width);
+    // print_vec(vp->v, "v");
+    // print_vec(vp->u, "u");
 
     vp->pixel_delta_u = div_vec_by_scal(vp->u, WIDTH);
     vp->pixel_delta_v = div_vec_by_scal(vp->v, HEIGHT);
@@ -67,8 +67,8 @@ void viewport_init(t_vp *vp, t_camera *camera)
     vp->pixel00 = add_vec(vp->upper_left, mult_vec_by_scal(vp->pixel_delta_u, 0.5));
     vp->pixel00 = add_vec(vp->pixel00, mult_vec_by_scal(vp->pixel_delta_v, 0.5));
 
-    print_vec(vp->pixel_delta_u, "pixel_delta_u");
-    print_vec(vp->pixel_delta_v, "pixel_delta_v");
-    print_vec(vp->upper_left, "upper_left");
-    print_vec(vp->pixel00, "pixel00");
+    // print_vec(vp->pixel_delta_u, "pixel_delta_u");
+    // print_vec(vp->pixel_delta_v, "pixel_delta_v");
+    // print_vec(vp->upper_left, "upper_left");
+    // print_vec(vp->pixel00, "pixel00");
 }

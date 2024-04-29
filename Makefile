@@ -20,12 +20,15 @@ SRCS = src/parser/ambient.c \
 	   src/parser/RGB.c
 SRCS += src/struct_init.c \
 		src/main.c
+SRCS += src/objects/init_objects.c \
+		src/objects/list_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
 CFLAGS = -Iinc/ -g #-Wall -Wextra -Werror
 
 INC = inc/miniRT.h \
+	  inc/structures.h
 	  # inc/parser.h
 
 SILENCE = --no-print-directory

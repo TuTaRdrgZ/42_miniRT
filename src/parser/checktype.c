@@ -34,12 +34,14 @@ int	check_type(t_data *data, char **matrix)
         printf("Hey found a sphere\n"); // init_obj(data, "sphere");
         if (check_obj(matrix, arg_counter(matrix), SP))
             return (KO);
+        init_sphere(matrix); 
     }
     else if (!ft_strncmp(matrix[0], "pl", len))
     {
         printf("Hey found a plane\n"); // init_obj(data, "sphere");
         if (check_obj(matrix, arg_counter(matrix), PL))
             return (KO);
+        init_plane(matrix);
     }
     else if (!ft_strncmp(matrix[0], "cy", len))
     {

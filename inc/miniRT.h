@@ -6,6 +6,8 @@
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"
 #include "../lib/vector/vector.h"
+#include "structures.h"
+// #include "../src/parser/parser.h"
 #define WIDTH 400
 #define HEIGHT 225
 
@@ -92,5 +94,6 @@ void camera_init(t_camera *camera);
 void data_init(t_data *data, int width, int height);
 t_point new_point(float x, float y, float z);
 void viewport_init(t_vp *vp, t_camera *camera);
-
+t_sp    *init_sphere(char **data);
+t_pl    *init_plane(char **data);
 #endif

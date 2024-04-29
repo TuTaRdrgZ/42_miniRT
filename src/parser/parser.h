@@ -2,8 +2,8 @@
 #define PARSER_H
 #include <stdio.h>
 #include <string.h>
-#include "../../inc/miniRT.h"
 #include <fcntl.h>
+#include "../../inc/miniRT.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #define OK 0

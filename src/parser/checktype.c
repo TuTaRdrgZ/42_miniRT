@@ -12,40 +12,40 @@ int	check_type(t_data *data, char **matrix)
         return (print_matrix_error(matrix, retval), KO);
     if (!ft_strncmp(matrix[0], "A", len))
     {
-        printf("Hey found ambient light\n"); // init_ambient(matrix, data);
+        printf("Hey found ambient light\n"); // TODO: init_ambient(matrix, data);
         if (check_ambient(matrix, arg_counter(matrix)) == KO)
             return (KO);
     }
     else if (!ft_strncmp(matrix[0], "L", len))
     {
-        printf("Hey found Light\n"); // init_light(matrix, data);
+        printf("Hey found Light\n"); // TODO: init_light(matrix, data);
         if (check_light(matrix, arg_counter(matrix)) == KO)
             return (KO);
     }
     else if (!ft_strncmp(matrix[0], "C", len))
     {
-        printf("Hey found camera here\n"); // init_camera()
+        printf("Hey found camera here\n");
         if (check_camera(matrix, arg_counter(matrix)))
             return (KO);
         camera_init(data->camera);
     }
     else if (!ft_strncmp(matrix[0], "sp", len))
     {
-        printf("Hey found a sphere\n"); // init_obj(data, "sphere");
+        printf("Hey found a sphere\n"); 
         if (check_obj(matrix, arg_counter(matrix), SP))
             return (KO);
-        init_sphere(matrix); 
+        init_obj(&(data->obj), matrix, SP);
     }
     else if (!ft_strncmp(matrix[0], "pl", len))
     {
-        printf("Hey found a plane\n"); // init_obj(data, "sphere");
+        printf("Hey found a plane\n"); 
         if (check_obj(matrix, arg_counter(matrix), PL))
             return (KO);
-        init_plane(matrix);
+        init_obj(&(data->obj), matrix, PL);
     }
     else if (!ft_strncmp(matrix[0], "cy", len))
     {
-        printf("Hey found a cylinder\n"); // init_obj(data, "sphere");
+        printf("Hey found a cylinder\n");  // TODO: init_cylinder()
         if (check_obj(matrix, arg_counter(matrix), CY))
             return (KO);
     }

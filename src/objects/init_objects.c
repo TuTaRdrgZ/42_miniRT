@@ -5,7 +5,7 @@
 t_sp    *init_sphere(char **data);
 t_pl    *init_plane(char **data);
 
-void    init_obj(t_obj *obj, char **obj_data, int type)
+void    init_obj(t_obj **obj, char **obj_data, int type)
 {
     t_obj *new;
 
@@ -13,16 +13,17 @@ void    init_obj(t_obj *obj, char **obj_data, int type)
     if (!new)
         return (printf("Malloc Failed\n"), exit(1));
     new->next = NULL;
+    new->type = type;
     if (type == SP)
         new->object = init_sphere(obj_data);
     else if (type == PL)
         new->object = init_plane(obj_data);
-    // else if (type == CY)
+    // else if (type == CY) // TODO
     //     new->object = init_cylinder(obj_data);
-    if (obj)
+    if ((*obj))
         (find_last(obj))->next = new;
     else
-        obj = new;
+        *obj = new;
 }
 
 t_sp    *init_sphere(char **data)
@@ -56,7 +57,7 @@ t_pl    *init_plane(char **data)
     new = ft_calloc(sizeof(t_pl), 1);
     split = ft_split(data[1], ',');
     if (!new || !split)
-        exit(-1); // crear funcion exit_error
+        exit(-1); // TODO:   crear funcion exit_error
     new->coordinates = new_vec(ft_atof(split[0]), ft_atof(split[1]), ft_atof(split[2]));
     ft_free(split);
     split = ft_split(data[2], ',');

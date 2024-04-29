@@ -36,5 +36,5 @@ typedef struct s_pl
     t_rgb       rgb;
 }               t_pl;
 
-t_obj	*find_last(t_obj *obj);
+t_obj	*find_last(t_obj **obj);
 #endif

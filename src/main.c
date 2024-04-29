@@ -114,6 +114,47 @@ void ft_hook(void* param)
 
 // -----------------------------------------------------------------------------
 
+
+void print_obj_node(t_obj* node)
+{
+      if (node == NULL) {
+        printf("Nodo NULL\n");
+        return;
+      }
+
+      printf("Tipo: %d\n", node->type);
+
+      // Imprimir el objeto según su tipo
+      if (node->type == SP) {
+        t_sp* sp = (t_sp*)node->object; // Convertir el objeto a t_sp
+        printf("Esfera:\n");
+        printf("Coordenadas: (%f, %f, %f)\n", sp->coordinates.x, sp->coordinates.y, sp->coordinates.z);
+        printf("Color RGB: (%d, %d, %d)\n", sp->rgb.r, sp->rgb.g, sp->rgb.b);
+        printf("Diámetro: %f\n", sp->diameter);
+      } else if (node->type == PL) {
+        t_pl* pl = (t_pl*)node->object; // Convertir el objeto a t_pl
+        printf("Plano:\n");
+        printf("Coordenadas: (%f, %f, %f)\n", pl->coordinates.x, pl->coordinates.y, pl->coordinates.z);
+        printf("Normal: (%f, %f, %f)\n", pl->normal.x, pl->normal.y, pl->normal.z);
+        printf("Color RGB: (%d, %d, %d)\n", pl->rgb.r, pl->rgb.g, pl->rgb.b);
+      } else {
+        printf("Tipo de objeto desconocido: %d\n", node->type);
+      }
+
+      printf("Siguiente nodo: %p\n\n", node->next);
+}
+
+void    print_all_nodes(t_data *data)
+{
+    t_obj *obj = data->obj;
+
+    while (obj)
+    {
+        print_obj_node(obj);
+        obj = obj->next;
+    }
+}
+
 int32_t main(int argc, char **argv)
 {
 	t_data data;
@@ -129,6 +170,7 @@ int32_t main(int argc, char **argv)
 	data_init(&data, WIDTH, HEIGHT);
 	if (read_file(&data, file))
         return (1);
+    print_all_nodes(&data);
     if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
 		puts(mlx_strerror(mlx_errno));

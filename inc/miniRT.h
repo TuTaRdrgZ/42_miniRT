@@ -87,14 +87,17 @@ typedef struct s_data {
     t_vp *vp;
     t_obj   *obj;
     t_ambient *ambient;
+    t_light     *light;
     int     width;
     int     height;
 }            t_data;
 
-void camera_init(t_camera *camera);
+void camera_init(t_camera *camera, char **data);
 void data_init(t_data *data, int width, int height);
 t_point new_point(float x, float y, float z);
 void viewport_init(t_vp *vp, t_camera *camera);
+
+void    init_light(t_light *light, char **data);
 void    init_ambient(t_ambient *ambient, char **data);
 void    init_obj(t_obj **obj, char **obj_data, int type);
 t_sp    *init_sphere(char **data);

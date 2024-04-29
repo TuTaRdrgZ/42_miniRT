@@ -1,4 +1,5 @@
 #include "../inc/miniRT.h"
+#include "../src/parser/parser.h"
 
 t_point new_point(float x, float y, float z)
 {
@@ -22,12 +23,20 @@ t_vec *new_v(int x, int y, int z)
     return (tmp);
 }
 
-void camera_init(t_camera *camera)
+void camera_init(t_camera *camera, char **data)
 {
-    camera->origin = new_point(0, 0, 0);
-    camera->direction = new_vec(0, 0, -1);
+    char **split;
+
+    split = ft_split(data[1], ',');
+    if (!split)
+        exit(EXIT_FAILURE);
+    camera->origin = new_point(ft_atof(split[0]), ft_atof(split[1]), ft_atof(split[2]));
+    ft_free(split);
+    split = ft_split(data[2], ',');
+    camera->direction = new_vec(ft_atof(split[0]), ft_atof(split[1]), ft_atof(split[2]));
+    ft_free(split);
     camera->up = new_vec(0, 1, 0);
-    camera->fov_h = 90;
+    camera->fov_h = ft_atoi(data[3]);
     camera->aspect_ratio = 16.0 / 9.0;
     camera->focal_length = 1.0;
     camera->aperture = 0.0;
@@ -43,6 +52,7 @@ void data_init(t_data *data, int width, int height)
     data->camera = malloc(sizeof(t_camera));
     data->vp = malloc(sizeof(t_vp));
     data->ambient = ft_calloc(sizeof(t_ambient), 1);
+    data->light = ft_calloc(sizeof(t_light), 1);
 }
 
 void viewport_init(t_vp *vp, t_camera *camera)

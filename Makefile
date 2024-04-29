@@ -20,6 +20,7 @@ INC = inc/miniRT.h \
 MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/
 MLXLIB = lib/MLX42/build/libmlx42.a
 VECTOR = lib/vector/vector.a
+LIBFTLIB = lib/libft/libft.a
 LIB = lib/
 CC = gcc
 
@@ -31,7 +32,7 @@ all: $(NAME)
 $(NAME): $(OBJS) $(INC)
 	@make -C lib/vector
 	@make -C lib/libft/
-	$(CC) $(CFLAGS) $(OBJS) $(VECTOR) $(MLXLIB) $(MLXFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(VECTOR) $(LIBFTLIB) $(MLXLIB) $(MLXFLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

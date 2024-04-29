@@ -42,6 +42,7 @@ void data_init(t_data *data, int width, int height)
     data->ray->f_first = 0;
     data->camera = malloc(sizeof(t_camera));
     data->vp = malloc(sizeof(t_vp));
+    data->ambient = ft_calloc(sizeof(t_ambient), 1);
 }
 
 void viewport_init(t_vp *vp, t_camera *camera)

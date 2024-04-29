@@ -15,6 +15,11 @@ int	check_type(t_data *data, char **matrix)
         printf("Hey found ambient light\n"); // TODO: init_ambient(matrix, data);
         if (check_ambient(matrix, arg_counter(matrix)) == KO)
             return (KO);
+        init_ambient(data->ambient, matrix);
+        printf("ambient->ratio = %f\n", data->ambient->ratio);
+        printf("ambient->rgb.r = %d\n", data->ambient->rgb.r);
+        printf("ambient->rgb.g = %d\n", data->ambient->rgb.g);
+        printf("ambient->rgb.b = %d\n", data->ambient->rgb.b);
     }
     else if (!ft_strncmp(matrix[0], "L", len))
     {

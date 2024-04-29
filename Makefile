@@ -21,6 +21,7 @@ SRCS = src/parser/ambient.c \
 SRCS += src/struct_init.c \
 		src/main.c
 SRCS += src/objects/init_objects.c \
+		src/objects/init_light.c \
 		src/objects/list_utils.c
 
 OBJS = $(SRCS:.c=.o)

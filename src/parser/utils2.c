@@ -29,14 +29,14 @@ int check_dot(char *s, int i, int j, int c)
 	while (s[++i])
 	{
 		if ((i == 0 && s[i] == '.') || (j > 1))
-            return (printf(RED"Error\n"RST"Invalid coordinate: %s\n", s), KO);
+            return (printf(RED"Error\n"RST"Wrong dot position: %s\n", s), KO);
 		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1
 				|| ft_isdigit(s[i + 1]) != 1))
-            return (printf(RED"Error\n"RST"Invalid coordinate: %s\n", s), KO);
+            return (printf(RED"Error\n"RST"Wrong dot position: %s\n", s), KO);
 		else if (s[i] == '.')
 			c = i + 4;
 		else if (i == c)
-            return (printf(RED"Error\n"RST"Invalid coordinate: %s\n", s), KO);
+            return (printf(RED"Error\n"RST"Max 3 decimals: %s\n", s), KO);
 	}
     return (OK);
 }
@@ -57,6 +57,15 @@ int check_negative(char *str)
         i++;
     }
     return (OK);
+}
+
+float check_diameter(char *str)
+{
+    if (ft_strlen(str) == 1 && ft_isdigit(str[0]))
+        return (ft_atof(str));
+    if (check_dot(str, -1, 0, -1))
+        return (KO);
+    return (ft_atof(str));
 }
 
 int check_ratio(char *str)

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "parser/parser.h"
 
 // static mlx_image_t* image;
 
@@ -113,20 +114,22 @@ void ft_hook(void* param)
 
 // -----------------------------------------------------------------------------
 
-int32_t main(void)
+int32_t main(int argc, char **argv)
 {
 	t_data data;
-	data_init(&data, WIDTH, HEIGHT);
-	camera_init(data.camera);
-	viewport_init(data.vp, data.camera);
+    char    *file;
 	mlx_t* mlx;
-	data.mlx = mlx;
 	mlx_image_t* image;
-	data.image = image;
-	t_vec color;
-	data.color = &color;
 
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+    if (argc != 2)
+        return (print_error("Invalid arguments\n"), 1);
+    file = argv[1];
+	if (!is_valid_filetype(file))
+		return (printf("Wrong filetype\n"), 1);
+	data_init(&data, WIDTH, HEIGHT);
+	if (read_file(&data, file))
+        return (1);
+    if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
@@ -143,10 +146,15 @@ int32_t main(void)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	mlx_loop_hook(mlx, ft_color, &data);
-	mlx_loop_hook(mlx, ft_hook, &data);
-
-	mlx_loop(mlx);
+	//camera_init(data.camera);
+	viewport_init(data.vp, data.camera);
+	data.mlx = mlx;
+	data.image = image;
+	t_vec color;
+	data.color = &color;
+	// mlx_loop_hook(mlx, ft_color, &data);
+	// mlx_loop_hook(mlx, ft_hook, &data);
+	// mlx_loop(mlx);
 	mlx_terminate(mlx);
 	exit(EXIT_SUCCESS);
 }

@@ -37,7 +37,7 @@ all: $(OBJ_D) $(NAME)
 
 $(NAME): $(SRCOBJ)
 	@ar -rcs $(NAME) $^
-	@echo "$(RED)--->$(BLUE)Libvec is compiled.$(WHITE)"
+	@printf "$(RED)--->$(BLUE)Libvec is compiled.$(WHITE)"
 
 $(OBJ_D)/%.o: %.c message
 	@$(CC) $(CFLAGS) -c $< -o $@

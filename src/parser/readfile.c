@@ -1,6 +1,17 @@
 #include "parser.h"
 
-int	read_file(/*t_data *data,*/ char const *filename)
+// free and get the next line
+static char	*new_line(char **matrix, char *line, int fd)
+{
+	char	*new;
+
+	new = get_next_line(fd);
+	ft_free(matrix);
+	free(line);
+	return (new);
+}
+
+int	read_file(t_data *data, char const *filename)
 {
 	int		fd;
 	char	*line;
@@ -20,7 +31,7 @@ int	read_file(/*t_data *data,*/ char const *filename)
 		}
         line = ft_strtrimfree(line, " \n");
 		matrix_line = ft_split(line, ' ');
-		if (check_type(matrix_line) == KO) // checkeamos el tipo de objeto y que los parametros sean validos
+		if (check_type(data, matrix_line) == KO) // checkeamos el tipo de objeto y que los parametros sean validos
 		{
 			free(line);
 			ft_free(matrix_line);
@@ -31,15 +42,4 @@ int	read_file(/*t_data *data,*/ char const *filename)
 	free(line);
 	close(fd);
 	return (OK);
-}
-
-// free and get the next line
-char	*new_line(char **matrix, char *line, int fd)
-{
-	char	*new;
-
-	new = get_next_line(fd);
-	ft_free(matrix);
-	free(line);
-	return (new);
 }

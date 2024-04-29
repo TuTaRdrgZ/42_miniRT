@@ -23,6 +23,7 @@ int check_ambient(char **ambient, int argc/*, t_data *data*/);
 char *ft_strtrimfree(char *str, char *s);
 void    print_matrix_error(char **matrix, int arg);
 int check_camera(char **camera, int argc);
+int check_normalized_vector(char *str);
 
 int check_light(char **light, int argc);
 int check_rgb(char *str);

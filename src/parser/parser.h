@@ -26,6 +26,7 @@ char *ft_strtrimfree(char *str, char *s);
 void    print_matrix_error(char **matrix, int arg);
 int check_camera(char **camera, int argc);
 int check_obj(char **matrix, int argc, int type);
+int check_normalized_vector(char *str);
 
 int check_light(char **light, int argc);
 int check_rgb(char *str);

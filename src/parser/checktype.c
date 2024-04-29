@@ -35,10 +35,18 @@ int	check_type(t_data *data, char **matrix)
         if (check_obj(matrix, arg_counter(matrix), SP))
             return (KO);
     }
-    else if (!ft_strncmp(matrix[0], "cy", len))
-        printf("Hey found a cylinder\n"); // init_obj(data, "sphere");
     else if (!ft_strncmp(matrix[0], "pl", len))
+    {
         printf("Hey found a plane\n"); // init_obj(data, "sphere");
+        if (check_obj(matrix, arg_counter(matrix), PL))
+            return (KO);
+    }
+    else if (!ft_strncmp(matrix[0], "cy", len))
+    {
+        printf("Hey found a cylinder\n"); // init_obj(data, "sphere");
+        if (check_obj(matrix, arg_counter(matrix), CY))
+            return (KO);
+    }
     else
     {
         printf(RED "Error\nINVALID ID:"RST" \"%s\"\n", matrix[0]);

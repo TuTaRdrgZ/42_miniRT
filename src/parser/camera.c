@@ -11,7 +11,7 @@ int check_normalized_vector(char *str)
         exit(-1);
     i = -1;
     if (arg_counter(nor_matrix) != 3)
-        return (printf(RED"Error\nInvalid orientation vector: %s\n"RST, str), ft_free(nor_matrix), KO);
+        return (printf(RED"Error\nInvalid normalized vector: %s\n"RST, str), ft_free(nor_matrix), KO);
     while (nor_matrix[++i])
     {
         if (check_negative(nor_matrix[i]))
@@ -20,7 +20,7 @@ int check_normalized_vector(char *str)
             return (ft_free(nor_matrix), KO);
         number = ft_atof(nor_matrix[i]);
         if (number > 1 || number < -1)
-            return (printf(RED"Error\nInvalid orientation vector: %s\n"RST, str), ft_free(nor_matrix), KO);
+            return (printf(RED"Error\nInvalid normalized vector range [-1,1]: %s\n"RST, str), ft_free(nor_matrix), KO);
     }
     return (ft_free(nor_matrix), OK);
 }

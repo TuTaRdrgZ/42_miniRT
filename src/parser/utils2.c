@@ -65,6 +65,8 @@ float check_diameter(char *str)
         return (ft_atof(str));
     if (check_dot(str, -1, 0, -1))
         return (KO);
+    if (ft_atof(str) < 0)
+        return (printf(RED"Error\nDiameter/Height cannot be negative: %s\n", str), KO);
     return (ft_atof(str));
 }
 

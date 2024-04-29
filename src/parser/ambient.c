@@ -10,6 +10,6 @@ int check_ambient(char **ambient, int argc/*, t_data *data*/)
     if (returnval)
        return (print_matrix_error(ambient, returnval), KO);
     if (check_rgb(ambient[2]))
-        return (printf(RED"%s\n"RST, ambient[2]), KO);
+        return (KO);
     return (OK);
 }

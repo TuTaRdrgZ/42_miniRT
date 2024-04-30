@@ -123,6 +123,7 @@ void print_obj_node(t_obj* node)
       }
 
       printf("Tipo: %d\n", node->type);
+      printf("Nodo: %p\n", node);
 
       // Imprimir el objeto según su tipo
       if (node->type == SP) {
@@ -162,9 +163,10 @@ int32_t main(int argc, char **argv)
 	mlx_t* mlx;
 	mlx_image_t* image;
 
+    (void)argv;
     if (argc != 2)
-        return (print_error("Invalid arguments\n"), 1);
-    file = argv[1];
+        (print_error("Invalid arguments\n"));
+    file = "test.rt";
 	if (!is_valid_filetype(file))
 		return (printf("Wrong filetype\n"), 1);
 	data_init(&data, WIDTH, HEIGHT);

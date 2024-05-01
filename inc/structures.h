@@ -43,5 +43,14 @@ typedef struct s_pl
 	t_rgb			rgb;
 }					t_pl;
 
+typedef struct s_cy
+{
+    t_vec           coordinates;
+    t_vec           normal;
+    float           diameter;
+    float           height;
+    t_rgb           rgb;
+}                   t_cy;
+
 t_obj				*find_last(t_obj **obj);
 #endif

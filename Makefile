@@ -26,7 +26,7 @@ SRCS += src/objects/init_objects.c \
 
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Iinc/ -g #-Wall -Wextra -Werror
+CFLAGS = -Iinc/ -g -Wall -Wextra -Werror -Wno-misleading-indentation -Wno-implicit-fallthrough
 
 INC = inc/miniRT.h \
 	  inc/structures.h

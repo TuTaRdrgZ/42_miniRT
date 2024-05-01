@@ -72,7 +72,6 @@ t_vec ray_color(t_ray *ray)
 void ft_color(void* param)
 {
 	t_data *data = (t_data*)param;
-	mlx_t* mlx = data->mlx;
     mlx_image_t* image = data->image;
 
 	for (uint32_t j = 0; j < HEIGHT; j++) {
@@ -122,23 +121,35 @@ void print_obj_node(t_obj* node)
         return;
       }
 
-      printf("Tipo: %d\n", node->type);
-      printf("Nodo: %p\n", node);
-
+      printf("Tipo %d, ", node->type);
       // Imprimir el objeto según su tipo
       if (node->type == SP) {
         t_sp* sp = (t_sp*)node->object; // Convertir el objeto a t_sp
         printf("Esfera:\n");
+        printf("Nodo: %p\n", node);
         printf("Coordenadas: (%f, %f, %f)\n", sp->coordinates.x, sp->coordinates.y, sp->coordinates.z);
         printf("Color RGB: (%d, %d, %d)\n", sp->rgb.r, sp->rgb.g, sp->rgb.b);
         printf("Diámetro: %f\n", sp->diameter);
       } else if (node->type == PL) {
         t_pl* pl = (t_pl*)node->object; // Convertir el objeto a t_pl
         printf("Plano:\n");
+        printf("Nodo: %p\n", node);
         printf("Coordenadas: (%f, %f, %f)\n", pl->coordinates.x, pl->coordinates.y, pl->coordinates.z);
         printf("Normal: (%f, %f, %f)\n", pl->normal.x, pl->normal.y, pl->normal.z);
         printf("Color RGB: (%d, %d, %d)\n", pl->rgb.r, pl->rgb.g, pl->rgb.b);
-      } else {
+      } 
+      else if (node->type == CY)
+      {
+        t_cy* cy = (t_cy*)node->object;
+        printf("Cilindro:\n");
+        printf("Nodo: %p\n", node);
+        printf("Coordenadas: (%f, %f, %f)\n", cy->coordinates.x, cy->coordinates.y, cy->coordinates.z);
+        printf("Normal: (%f, %f, %f)\n", cy->normal.x, cy->normal.y, cy->normal.z);
+        printf("Diámetro: %f\n", cy->diameter);
+        printf("Altura: %f\n", cy->height);
+        printf("Color RGB: (%d, %d, %d)\n", cy->rgb.r, cy->rgb.g, cy->rgb.b);
+      }
+      else {
         printf("Tipo de objeto desconocido: %d\n", node->type);
       }
 
@@ -156,12 +167,37 @@ void    print_all_nodes(t_data *data)
     }
 }
 
+void    free_all_objects(t_data *data)
+{
+    t_obj *obj;
+    t_obj *tmp;
+
+    obj = data->obj;
+    while (obj)
+    {
+        tmp = obj->next;
+        if (obj->object)
+            free(obj->object);
+        free(obj);
+        obj = tmp;
+    }
+}
+
+void    free_data(t_data *data)
+{
+    free(data->color);
+    free(data->ray);
+    free(data->camera);
+    free(data->vp);
+    free(data->ambient);
+    free(data->light);
+    free_all_objects(data);
+}
+
 int32_t main(int argc, char **argv)
 {
 	t_data data;
     char    *file;
-	mlx_t* mlx;
-	mlx_image_t* image;
 
     (void)argv;
     if (argc != 2)
@@ -173,32 +209,7 @@ int32_t main(int argc, char **argv)
 	if (read_file(&data, file))
         return (1);
     print_all_nodes(&data);
-    if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-	{
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (!(data.image = mlx_new_image(mlx, WIDTH, HEIGHT)))
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(mlx, data.image, 0, 0) == -1)
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	//camera_init(data.camera);
 	viewport_init(data.vp, data.camera);
-	data.mlx = mlx;
-	data.image = image;
-	t_vec color;
-	data.color = &color;
-	// mlx_loop_hook(mlx, ft_color, &data);
-	// mlx_loop_hook(mlx, ft_hook, &data);
-	// mlx_loop(mlx);
-	mlx_terminate(mlx);
+    free_data(&data);
 	exit(EXIT_SUCCESS);
 }

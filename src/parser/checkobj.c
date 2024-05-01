@@ -48,9 +48,9 @@ int check_cylinder(char **cylinder)
         return (KO);
     if (check_normalized_vector(cylinder[2]))
         return (KO);
-    if (check_diameter(cylinder[3]))
+    if (check_diameter(cylinder[3]) < 0)
         return (KO);
-    if (check_diameter(cylinder[4])) // actually checks the height
+    if (check_diameter(cylinder[4]) < 0) // actually checks the height
         return (KO);
     if (check_rgb(cylinder[5]))
         return (KO);

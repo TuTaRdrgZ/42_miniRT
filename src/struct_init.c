@@ -53,6 +53,7 @@ void data_init(t_data *data, int width, int height)
     data->vp = malloc(sizeof(t_vp));
     data->ambient = ft_calloc(sizeof(t_ambient), 1);
     data->light = ft_calloc(sizeof(t_light), 1);
+    data->obj = NULL;
 }
 
 void viewport_init(t_vp *vp, t_camera *camera)

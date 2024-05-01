@@ -34,6 +34,7 @@ typedef struct s_sp
 	t_vec			coordinates;
 	t_rgb			rgb;
 	float			diameter;
+    float           radius;
 }					t_sp;
 
 typedef struct s_pl

@@ -39,6 +39,7 @@ t_sp	*init_sphere(char **data)
 	new->coordinates = new_vec(ft_atof(split[0]), ft_atof(split[1]),
 			ft_atof(split[2]));
 	new->diameter = ft_atof(data[2]);
+    new->radius = new->diameter / 2.0;
 	ft_free(split);
 	split = ft_split(data[3], ',');
 	new->rgb.r = ft_atoi(split[0]);

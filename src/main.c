@@ -199,10 +199,9 @@ int32_t main(int argc, char **argv)
 	t_data data;
     char    *file;
 
-    (void)argv;
     if (argc != 2)
-        (print_error("Invalid arguments\n"));
-    file = "test.rt";
+        return (print_error("Invalid arguments\n"));
+    file = argv[1];
 	if (!is_valid_filetype(file))
 		return (printf("Wrong filetype\n"), 1);
 	data_init(&data, WIDTH, HEIGHT);

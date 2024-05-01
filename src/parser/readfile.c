@@ -16,7 +16,7 @@ int	read_file(t_data *data, char const *filename)
 	int		fd;
 	char	*line;
 	char	**matrix_line;
-
+    
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (print_error("Failed to open file\n"));

@@ -20,7 +20,7 @@ void	init_obj(t_obj **obj, char **obj_data, int type)
 		new->object = init_plane(obj_data);
 	// else if (type == CY) // TODO
 	//     new->object = init_cylinder(obj_data);
-	if (!(*obj)->object)
+	if (!(*obj))
 		*obj = new;
 	else
 		(find_last(obj))->next = new;

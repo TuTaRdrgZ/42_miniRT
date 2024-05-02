@@ -46,7 +46,6 @@ void data_init(t_data *data, int width, int height)
 {
     data->width = width;
     data->height = height;
-    data->color = malloc(sizeof(t_vec));
     data->ray = malloc(sizeof(t_ray));
     data->ray->f_first = 0;
     data->camera = malloc(sizeof(t_camera));

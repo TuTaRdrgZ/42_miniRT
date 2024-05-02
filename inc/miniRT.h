@@ -8,8 +8,8 @@
 #include "../lib/vector/vector.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
-#define WIDTH 400
-#define HEIGHT 225
+#define WIDTH 1920
+#define HEIGHT 1080
 
 # define RST "\033[0m"    /* Reset to default color */
 # define RED "\033[1;31m" /* Bold Red */
@@ -81,7 +81,6 @@ typedef struct viewport
 typedef struct s_data {
     mlx_t *mlx;
     mlx_image_t* image;
-    t_vec *color;
     t_ray *ray;
     t_camera *camera;
     t_vp *vp;
@@ -96,6 +95,8 @@ void camera_init(t_camera *camera, char **data);
 void data_init(t_data *data, int width, int height);
 t_point new_point(float x, float y, float z);
 void viewport_init(t_vp *vp, t_camera *camera);
+
+bool	hit_sphere(t_ray *ray, t_sp *sphere);
 
 void    init_light(t_light *light, char **data);
 void    init_ambient(t_ambient *ambient, char **data);

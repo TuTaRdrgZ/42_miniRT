@@ -37,7 +37,7 @@ int	check_type(t_data *data, char **matrix)
     }
     else if (!ft_strncmp(matrix[0], "C", len))
     {
-        // printf("Hey found camera here\n");
+        printf("Hey found camera here\n");
         if (check_camera(matrix, arg_counter(matrix)))
             return (KO);
         camera_init(data->camera, matrix);

@@ -23,6 +23,7 @@ SRCS += src/struct_init.c \
 SRCS += src/objects/init_objects.c \
 		src/objects/init_light.c \
 		src/objects/list_utils.c
+SRCS += src/intersection/hit_sphere.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -9,11 +9,11 @@
 
 // -----------------------------------------------------------------------------
 
-int32_t ft_pixel(t_color *color)
+int32_t ft_pixel(t_vec color)
 {
 	int a = 240;
 
-    return ((int)color->x << 24 | (int)color->y << 16 | (int)color->z << 8 | a);
+    return ((int)color.x << 24 | (int)color.y << 16 | (int)color.z << 8 | a);
 }
 
 // int	vector_to_color(t_vec color)
@@ -76,15 +76,16 @@ void ft_color(void* param)
 
 	for (uint32_t j = 0; j < HEIGHT; j++) {
         for (uint32_t i = 0; i < WIDTH; i++) {
+            uint32_t color = 255;
             t_vec pixel_center = add_vec(data->vp->pixel00, add_vec(mult_vec_by_scal(data->vp->pixel_delta_u, i), mult_vec_by_scal(data->vp->pixel_delta_v, j)));
             t_vec ray_direction = subtract_vec(pixel_center, data->camera->origin);
             data->ray->direction = ray_direction;
 			data->ray->origin = data->camera->origin;
-			// print_vec(data->ray->direction, "direction");
-			// print_vec(data->ray->origin, "origin");
-			// print_vec(pixel_center, "pixel_center");
-			*data->color = ray_color(data->ray);
-			uint32_t color = ft_pixel(data->color);
+
+            if (hit_sphere(data->ray, (t_sp*)(data->obj)->object))
+            {
+			     color = ft_pixel(ray_color(data->ray));
+            }
 			mlx_put_pixel(image, i, j, color);
         }
     }
@@ -112,7 +113,6 @@ void ft_hook(void* param)
 }
 
 // -----------------------------------------------------------------------------
-
 
 void print_obj_node(t_obj* node)
 {
@@ -185,7 +185,6 @@ void    free_all_objects(t_data *data)
 
 void    free_data(t_data *data)
 {
-    free(data->color);
     free(data->ray);
     free(data->camera);
     free(data->vp);
@@ -198,6 +197,8 @@ int32_t main(int argc, char **argv)
 {
 	t_data data;
     char    *file;
+    mlx_t   *mlx;
+    mlx_image_t *image;
 
     if (argc != 2)
         return (print_error("Invalid arguments\n"));
@@ -207,8 +208,31 @@ int32_t main(int argc, char **argv)
 	data_init(&data, WIDTH, HEIGHT);
 	if (read_file(&data, file))
         return (1);
-    print_all_nodes(&data);
 	viewport_init(data.vp, data.camera);
+    if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false)))
+	{
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (!(image = mlx_new_image(mlx, WIDTH, HEIGHT)))
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+    data.mlx = mlx;
+    data.image = image;
+    print_all_nodes(&data);
+    mlx_loop_hook(mlx, ft_color, &data);
+    mlx_loop_hook(mlx, ft_hook, &data);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
     free_data(&data);
 	exit(EXIT_SUCCESS);
 }

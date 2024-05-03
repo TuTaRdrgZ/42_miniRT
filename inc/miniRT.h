@@ -8,8 +8,11 @@
 #include "../lib/vector/vector.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 720
+#define HEIGHT 440
+#define SP 0
+#define PL 1
+#define CY 2
 
 # define RST "\033[0m"    /* Reset to default color */
 # define RED "\033[1;31m" /* Bold Red */
@@ -96,6 +99,8 @@ void data_init(t_data *data, int width, int height);
 t_point new_point(float x, float y, float z);
 void viewport_init(t_vp *vp, t_camera *camera);
 
+
+bool    hit_any_object(t_obj **obj, t_ray *ray);
 bool	hit_sphere(t_ray *ray, t_sp *sphere);
 
 void    init_light(t_light *light, char **data);

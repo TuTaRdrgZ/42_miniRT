@@ -1,4 +1,4 @@
-#include "../inc/miniRT.h"
+#include "miniRT.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -69,6 +69,7 @@ t_vec ray_color(t_ray *ray)
 // 	mlx_put_pixel(img, x, y, color_int);
 // }
 
+
 void ft_color(void* param)
 {
 	t_data *data = (t_data*)param;
@@ -82,7 +83,7 @@ void ft_color(void* param)
             data->ray->direction = ray_direction;
 			data->ray->origin = data->camera->origin;
 
-            if (hit_sphere(data->ray, (t_sp*)(data->obj)->object))
+            if (hit_any_object(&data->obj, data->ray))
             {
 			     color = ft_pixel(ray_color(data->ray));
             }

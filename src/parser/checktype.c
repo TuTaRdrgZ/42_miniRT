@@ -4,14 +4,12 @@
 // function that checks the id and init all the objs
 int	check_type(t_data *data, char **matrix)
 {
-	int	len;
     int retval;
 
-	len = ft_strlen(matrix[0]);
     retval = is_valid_char(matrix);
 	if (retval)
         return (print_matrix_error(matrix, retval), KO);
-    if (!ft_strncmp(matrix[0], "A", len))
+    if (!ft_strcmp(matrix[0], "A"))
     {
         printf("Hey found ambient light\n");
         if (check_ambient(matrix, arg_counter(matrix)) == KO)
@@ -22,7 +20,7 @@ int	check_type(t_data *data, char **matrix)
         printf("ambient->rgb.g = %d\n", data->ambient->rgb.g);
         printf("ambient->rgb.b = %d\n\n", data->ambient->rgb.b);
     }
-    else if (!ft_strncmp(matrix[0], "L", len))
+    else if (!ft_strcmp(matrix[0], "L"))
     {
         printf("Hey found Light\n");
         if (check_light(matrix, arg_counter(matrix)) == KO)
@@ -35,28 +33,28 @@ int	check_type(t_data *data, char **matrix)
         print_vec(data->light->coordinates, "light->coordinates");
         printf("\n");
     }
-    else if (!ft_strncmp(matrix[0], "C", len))
+    else if (!ft_strcmp(matrix[0], "C"))
     {
         printf("Hey found camera here\n");
         if (check_camera(matrix, arg_counter(matrix)))
             return (KO);
         camera_init(data->camera, matrix);
     }
-    else if (!ft_strncmp(matrix[0], "sp", len))
+    else if (!ft_strcmp(matrix[0], "sp"))
     {
         // printf("Hey found a sphere\n"); 
         if (check_obj(matrix, arg_counter(matrix), SP))
             return (KO);
         init_obj(&(data->obj), matrix, SP);
     }
-    else if (!ft_strncmp(matrix[0], "pl", len))
+    else if (!ft_strcmp(matrix[0], "pl"))
     {
         // printf("Hey found a plane\n"); 
         if (check_obj(matrix, arg_counter(matrix), PL))
             return (KO);
         init_obj(&(data->obj), matrix, PL);
     }
-    else if (!ft_strncmp(matrix[0], "cy", len))
+    else if (!ft_strcmp(matrix[0], "cy"))
     {
         // printf("Hey found a cylinder\n");
         if (check_obj(matrix, arg_counter(matrix), CY))

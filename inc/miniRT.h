@@ -41,6 +41,7 @@ typedef struct s_ray
 
 typedef struct s_camera
 {
+    int    total;
   // Posición de la cámara en el espacio 3D
   t_point origin;
 
@@ -102,6 +103,7 @@ void viewport_init(t_vp *vp, t_camera *camera);
 
 bool    hit_any_object(t_obj **obj, t_ray *ray);
 bool	hit_sphere(t_ray *ray, t_sp *sphere);
+bool intersect_plane(const t_ray *ray, const t_pl *plane, float *t);
 
 void    init_light(t_light *light, char **data);
 void    init_ambient(t_ambient *ambient, char **data);

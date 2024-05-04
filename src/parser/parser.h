@@ -1,11 +1,8 @@
 #ifndef PARSER_H
 #define PARSER_H
-#include <stdio.h>
-#include <string.h>
 #include <fcntl.h>
-#include "../../inc/miniRT.h"
+#include "miniRT.h"
 #include <stdbool.h>
-#include <stdlib.h>
 #define OK 0
 #define KO 1
 #define SP 0
@@ -34,5 +31,6 @@ int check_coordinates(char *str);
 int check_dot(char *s, int i, int j, int c);
 int check_negative(char *str);
 int check_ratio(char *str);
+int check_duplicated(t_data *data);
 float check_diameter(char *str);
 #endif

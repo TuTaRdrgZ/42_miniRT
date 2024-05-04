@@ -12,6 +12,7 @@ void init_ambient(t_ambient *ambient, char **data)
     ambient->rgb.r = ft_atoi(split[0]);
     ambient->rgb.g = ft_atoi(split[1]);
     ambient->rgb.b = ft_atoi(split[2]);
+    ambient->total++;
     ft_free(split);
 }
 
@@ -30,5 +31,6 @@ void    init_light(t_light *light, char **data)
     light->rgb.r = ft_atoi(split[0]);
     light->rgb.g = ft_atoi(split[1]);
     light->rgb.b = ft_atoi(split[2]);
+    light->total++;
     ft_free(split);
 }

@@ -40,6 +40,7 @@ void camera_init(t_camera *camera, char **data)
     camera->aspect_ratio = 16.0 / 9.0;
     camera->focal_length = 1.0;
     camera->aperture = 0.0;
+    camera->total++;
 }
 
 void data_init(t_data *data, int width, int height)
@@ -48,7 +49,7 @@ void data_init(t_data *data, int width, int height)
     data->height = height;
     data->ray = malloc(sizeof(t_ray));
     data->ray->f_first = 0;
-    data->camera = malloc(sizeof(t_camera));
+    data->camera = ft_calloc(sizeof(t_camera), 1);
     data->vp = malloc(sizeof(t_vp));
     data->ambient = ft_calloc(sizeof(t_ambient), 1);
     data->light = ft_calloc(sizeof(t_light), 1);

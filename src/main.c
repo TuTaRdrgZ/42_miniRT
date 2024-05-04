@@ -209,6 +209,8 @@ int32_t main(int argc, char **argv)
 	data_init(&data, WIDTH, HEIGHT);
 	if (read_file(&data, file))
         return (1);
+    if (check_duplicated(&data))
+        return (1);
 	viewport_init(data.vp, data.camera);
     if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false)))
 	{

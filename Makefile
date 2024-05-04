@@ -17,6 +17,7 @@ SRCS = src/parser/ambient.c \
 	   src/parser/readfile.c \
 	   src/parser/utils.c \
 	   src/parser/utils2.c \
+	   src/parser/check_dup.c \
 	   src/parser/RGB.c
 SRCS += src/struct_init.c \
 		src/main.c
@@ -28,7 +29,7 @@ SRCS += src/intersection/hit_sphere.c \
 
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Iinc/ -g -Wall -Wextra -Werror -Wno-misleading-indentation -Wno-implicit-fallthrough
+CFLAGS = -Iinc/ -Ilib/ -g -Wall -Wextra -Werror -Wno-misleading-indentation -Wno-implicit-fallthrough
 
 INC = inc/miniRT.h \
 	  inc/structures.h

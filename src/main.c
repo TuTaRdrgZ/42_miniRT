@@ -9,11 +9,9 @@
 
 // -----------------------------------------------------------------------------
 
-int32_t ft_pixel(t_vec color)
+int32_t ft_pixel(t_rgb color)
 {
-	int a = 240;
-
-    return ((int)color.x << 24 | (int)color.y << 16 | (int)color.z << 8 | a);
+    return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | 255);
 }
 
 // int	vector_to_color(t_vec color)
@@ -69,6 +67,22 @@ t_vec ray_color(t_ray *ray)
 // 	mlx_put_pixel(img, x, y, color_int);
 // }
 
+t_rgb   get_sphere_rgb(t_sp *sphere)
+{
+    return (sphere->rgb);
+}
+
+t_rgb   get_color(t_obj *object)
+{
+    t_rgb color;
+
+    color.r = 0;
+    color.g = 0;
+    color.b = 0;
+    if (object->type == SP)
+        return (get_sphere_rgb((t_sp*)object));
+    return (color);
+}
 
 void ft_color(void* param)
 {
@@ -83,10 +97,9 @@ void ft_color(void* param)
             data->ray->direction = ray_direction;
 			data->ray->origin = data->camera->origin;
 
-            if (hit_any_object(&data->obj, data->ray))
-            {
-			     color = ft_pixel(ray_color(data->ray));
-            }
+            if (hit_any_object(&data->obj, data->ray, i, j, data))
+                continue ;
+            color = 0;
 			mlx_put_pixel(image, i, j, color);
         }
     }
@@ -121,7 +134,6 @@ void print_obj_node(t_obj* node)
         printf("Nodo NULL\n");
         return;
       }
-
       printf("Tipo %d, ", node->type);
       // Imprimir el objeto según su tipo
       if (node->type == SP) {

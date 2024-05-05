@@ -1,70 +1,68 @@
 #include "parser.h"
-#include "../../lib/vector/vector.h"
+
+static int  check_type3(t_data *data, char **matrix)
+{
+    if (!ft_strcmp(matrix[0], "pl"))
+    {
+        if (check_obj(matrix, arg_counter(matrix), PL))
+            return (KO);
+        init_obj(&(data->obj), matrix, PL);
+        return (OK);
+    }
+    else if (!ft_strcmp(matrix[0], "cy"))
+    {
+        if (check_obj(matrix, arg_counter(matrix), CY))
+            return (KO);
+        init_obj(&(data->obj), matrix, CY);
+        return (OK);
+    }
+    else
+    {
+        printf(RED "Error\nINVALID ID:" RST " \"%s\"\n", matrix[0]);
+        return (KO);
+    }
+}
+
+static int	check_type2(t_data *data, char **matrix)
+{
+    if (!ft_strcmp(matrix[0], "C"))
+    {
+        if (check_camera(matrix, arg_counter(matrix)))
+            return (KO);
+        camera_init(data->camera, matrix);
+        return (OK);
+    }
+    else if (!ft_strcmp(matrix[0], "sp"))
+    {
+        if (check_obj(matrix, arg_counter(matrix), SP))
+            return (KO);
+        init_obj(&(data->obj), matrix, SP);
+        return (OK);
+    }
+    return (check_type3(data, matrix));
+}
 
 // function that checks the id and init all the objs
 int	check_type(t_data *data, char **matrix)
 {
-    int retval;
+    int	retval;
 
     retval = is_valid_char(matrix);
-	if (retval)
+    if (retval)
         return (print_matrix_error(matrix, retval), KO);
     if (!ft_strcmp(matrix[0], "A"))
     {
-        printf("Hey found ambient light\n");
         if (check_ambient(matrix, arg_counter(matrix)) == KO)
             return (KO);
         init_ambient(data->ambient, matrix);
-        printf("ambient->ratio = %f\n", data->ambient->ratio);
-        printf("ambient->rgb.r = %d\n", data->ambient->rgb.r);
-        printf("ambient->rgb.g = %d\n", data->ambient->rgb.g);
-        printf("ambient->rgb.b = %d\n\n", data->ambient->rgb.b);
+        return (OK);
     }
     else if (!ft_strcmp(matrix[0], "L"))
     {
-        printf("Hey found Light\n");
         if (check_light(matrix, arg_counter(matrix)) == KO)
             return (KO);
         init_light(data->light, matrix);
-        printf("light->ratio = %f\n", data->light->ratio);
-        printf("light->rgb.r = %d\n", data->light->rgb.r);
-        printf("light->rgb.g = %d\n", data->light->rgb.g);
-        printf("light->rgb.b = %d\n", data->light->rgb.b);
-        print_vec(data->light->coordinates, "light->coordinates");
-        printf("\n");
+        return (OK);
     }
-    else if (!ft_strcmp(matrix[0], "C"))
-    {
-        printf("Hey found camera here\n");
-        if (check_camera(matrix, arg_counter(matrix)))
-            return (KO);
-        camera_init(data->camera, matrix);
-    }
-    else if (!ft_strcmp(matrix[0], "sp"))
-    {
-        // printf("Hey found a sphere\n"); 
-        if (check_obj(matrix, arg_counter(matrix), SP))
-            return (KO);
-        init_obj(&(data->obj), matrix, SP);
-    }
-    else if (!ft_strcmp(matrix[0], "pl"))
-    {
-        // printf("Hey found a plane\n"); 
-        if (check_obj(matrix, arg_counter(matrix), PL))
-            return (KO);
-        init_obj(&(data->obj), matrix, PL);
-    }
-    else if (!ft_strcmp(matrix[0], "cy"))
-    {
-        // printf("Hey found a cylinder\n");
-        if (check_obj(matrix, arg_counter(matrix), CY))
-            return (KO);
-        init_obj(&(data->obj), matrix, CY);
-    }
-    else
-    {
-        printf(RED "Error\nINVALID ID:"RST" \"%s\"\n", matrix[0]);
-        return (KO);
-    }
-	return (OK);
+    return (check_type2(data, matrix));
 }

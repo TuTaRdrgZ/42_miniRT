@@ -1,5 +1,5 @@
-#include "../../inc/structures.h"
-#include "../parser/parser.h"
+#include "structures.h"
+#include "parser.h"
 
 void init_ambient(t_ambient *ambient, char **data)
 {

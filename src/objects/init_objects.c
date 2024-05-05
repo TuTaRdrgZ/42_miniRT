@@ -1,6 +1,6 @@
-#include "../../inc/structures.h"
-#include "../../lib/vector/vector.h"
-#include "../parser/parser.h"
+#include "structures.h"
+#include "lib/vector/vector.h"
+#include "parser.h"
 
 t_sp	*init_sphere(char **data);
 t_pl	*init_plane(char **data);

@@ -1,5 +1,5 @@
-#include "../inc/miniRT.h"
-#include "../src/parser/parser.h"
+#include "miniRT.h"
+#include "parser.h"
 
 t_point new_point(float x, float y, float z)
 {

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "parser/parser.h"
+#include "parser.h"
 
 // static mlx_image_t* image;
 

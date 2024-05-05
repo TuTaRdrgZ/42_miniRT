@@ -22,7 +22,7 @@ bool	solveQuadratic(float a, float b, float c, float *t0, float *t1)
 bool	hit_sphere(t_ray *ray, t_sp *sphere)
 {
 	t_vec	L;
-    t_op op;
+	t_op	op;
 
 	L = subtract_vec(ray->origin, sphere->coordinates);
 	op.a = dot_prod(ray->direction, ray->direction);

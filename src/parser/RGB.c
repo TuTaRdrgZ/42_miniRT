@@ -1,12 +1,12 @@
 #include "parser.h"
 
-static int check_rgb2(char **rgb, char *str)
+static int	check_rgb2(char **rgb, char *str)
 {
-    int i;
-    int j;
-	
-    i = -1;
-    j = -1;
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
 	while (rgb[++i])
 	{
 		j = -1;
@@ -15,7 +15,7 @@ static int check_rgb2(char **rgb, char *str)
 				return (printf(RED "Error\nInvalid RGB: %s\n" RST, str),
 					ft_free(rgb), KO);
 	}
-    return (OK);
+	return (OK);
 }
 
 int	check_rgb(char *str)
@@ -28,8 +28,8 @@ int	check_rgb(char *str)
 		return (printf("Malloc failed\n"), KO);
 	if (arg_counter(rgb) != 3)
 		return (print_matrix_error(rgb, -1), ft_free(rgb), KO);
-    if (check_rgb2(rgb, str))
-        return (KO);
+	if (check_rgb2(rgb, str))
+		return (KO);
 	rgb_colors[0] = ft_atoi(rgb[0]);
 	rgb_colors[1] = ft_atoi(rgb[1]);
 	rgb_colors[2] = ft_atoi(rgb[2]);

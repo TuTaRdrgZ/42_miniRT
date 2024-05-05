@@ -6,7 +6,7 @@
 /*   By: tuta <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:57:23 by tuta              #+#    #+#             */
-/*   Updated: 2024/04/29 14:03:13 by tuta             ###   ########.fr       */
+/*   Updated: 2024/05/05 19:57:08 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_valid_char(char **matrix)
 		{
 			if (s[j] != '-' && s[j] != '.' && s[j] != ',' && s[j] != ' '
 				&& ft_isdigit(s[j]) == 0 && s[j] != '\n')
-				return (printf(RED "Error\n"RST"Invalid char: "), i);
+				return (printf(RED "Error\n" RST "Invalid char: "), i);
 			j++;
 		}
 		i++;

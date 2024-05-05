@@ -46,9 +46,10 @@ bool	hit_any_object(t_obj **obj, t_ray *ray, int i, int j, t_data *data)
 			if (hit_sphere(ray, tmp->object))
 			{
 				t = distance_vec(ray->origin,
-                        subtract_vec(((t_sp *)tmp->object)->coordinates,
+						subtract_vec(((t_sp *)tmp->object)->coordinates,
 							ray->origin));
-				if (t < closest_t)	// Check if this is the closest intersection so far
+				if (t < closest_t)
+					// Check if this is the closest intersection so far
 				{
 					closest_t = t;
 					closest_color = get_sphere_rgb((t_sp *)tmp->object);
@@ -64,7 +65,7 @@ bool	hit_any_object(t_obj **obj, t_ray *ray, int i, int j, t_data *data)
 						subtract_vec(((t_pl *)tmp->object)->coordinates,
 							ray->origin));
 				if (t < closest_t)
-					// Check if this is the closest intersection so far
+				// Check if this is the closest intersection so far
 				{
 					closest_t = t;
 					closest_color = get_plane_rgb((t_pl *)tmp->object);

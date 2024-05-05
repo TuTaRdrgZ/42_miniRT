@@ -67,23 +67,6 @@ t_vec ray_color(t_ray *ray)
 // 	mlx_put_pixel(img, x, y, color_int);
 // }
 
-t_rgb   get_sphere_rgb(t_sp *sphere)
-{
-    return (sphere->rgb);
-}
-
-t_rgb   get_color(t_obj *object)
-{
-    t_rgb color;
-
-    color.r = 0;
-    color.g = 0;
-    color.b = 0;
-    if (object->type == SP)
-        return (get_sphere_rgb((t_sp*)object));
-    return (color);
-}
-
 void ft_color(void* param)
 {
 	t_data *data = (t_data*)param;

@@ -1,4 +1,4 @@
-#include "../../inc/miniRT.h"
+#include "miniRT.h"
 
 bool	solveQuadratic(float a, float b, float c, float *t0, float *t1)
 {
@@ -22,30 +22,25 @@ bool	solveQuadratic(float a, float b, float c, float *t0, float *t1)
 bool	hit_sphere(t_ray *ray, t_sp *sphere)
 {
 	t_vec	L;
-	float	a;
-	float	b;
-	float	c;
-	float	temp;
+    t_op op;
 
-	float t0, t1;
 	L = subtract_vec(ray->origin, sphere->coordinates);
-	a = dot_prod(ray->direction, ray->direction);
-	b = 2.0f * dot_prod(ray->direction, L);
-	c = dot_prod(L, L) - sphere->radius * sphere->radius;
-	if (!solveQuadratic(a, b, c, &t0, &t1))
+	op.a = dot_prod(ray->direction, ray->direction);
+	op.b = 2.0f * dot_prod(ray->direction, L);
+	op.c = dot_prod(L, L) - sphere->radius * sphere->radius;
+	if (!solveQuadratic(op.a, op.b, op.c, &op.t0, &op.t1))
 		return (false);
-	if (t0 > t1)
+	if (op.t0 > op.t1)
 	{
-		temp = t0;
-		t0 = t1;
-		t1 = temp;
+		op.temp = op.t0;
+		op.t0 = op.t1;
+		op.t1 = op.temp;
 	}
-	if (t0 < 0)
+	if (op.t0 < 0)
 	{
-		t0 = t1; // If t0 is negative, let's use t1 instead
-		if (t0 < 0)
+		op.t0 = op.t1; // If t0 is negative, let's use t1 instead
+		if (op.t0 < 0)
 			return (false); // Both t0 and t1 are negative
 	}
-	t1 = t0;
 	return (true);
 }

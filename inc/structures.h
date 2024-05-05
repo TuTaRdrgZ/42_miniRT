@@ -1,6 +1,16 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-# include "../lib/vector/vector.h"
+# include "vector/vector.h"
+
+typedef struct s_operation
+{
+	float			a;
+	float			b;
+	float			c;
+	float			t0;
+	float			t1;
+	float			temp;
+}					t_op;
 
 typedef struct s_rgb
 {
@@ -11,14 +21,14 @@ typedef struct s_rgb
 
 typedef struct s_ambient
 {
-    int             total; // for checking if there are more than 1 ambient light
+	int total; // for checking if there are more than 1 ambient light
 	double			ratio;
 	t_rgb			rgb;
 }					t_ambient;
 
 typedef struct s_light
 {
-    int             total; // currently not needed
+	int total; // currently not needed
 	double			ratio;
 	t_rgb			rgb;
 	t_vec			coordinates;
@@ -36,7 +46,7 @@ typedef struct s_sp
 	t_vec			coordinates;
 	t_rgb			rgb;
 	float			diameter;
-    float           radius;
+	float			radius;
 }					t_sp;
 
 typedef struct s_pl
@@ -48,12 +58,12 @@ typedef struct s_pl
 
 typedef struct s_cy
 {
-    t_vec           coordinates;
-    t_vec           normal;
-    float           diameter;
-    float           height;
-    t_rgb           rgb;
-}                   t_cy;
+	t_vec			coordinates;
+	t_vec			normal;
+	float			diameter;
+	float			height;
+	t_rgb			rgb;
+}					t_cy;
 
 t_obj				*find_last(t_obj **obj);
 #endif

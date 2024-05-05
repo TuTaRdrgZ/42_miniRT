@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "../lib/MLX42/include/MLX42/MLX42.h"
+#include "MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"
-#include "../lib/vector/vector.h"
+#include "vector/vector.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
 #define WIDTH 720

@@ -5,19 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-// static mlx_image_t* image;
-
-// -----------------------------------------------------------------------------
-
 int32_t	ft_pixel(t_rgb color)
 {
 	return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | 255);
 }
-
-// int	vector_to_color(t_vec color)
-// {
-// 	return (ft_pixel(color.x * 255, color.y * 255, color.z * 255, 255));
-// }
 
 t_vec	ray_color(t_ray *ray)
 {
@@ -30,46 +21,10 @@ t_vec	ray_color(t_ray *ray)
 		ray->scalar = tmp.x / ray->direction.x;
 		ray->f_first = 1;
 	}
-	// print_vec(ray->normalize_vec, "unit_direction");
-	// printf("length: %d\n", length_vec(unit_direction));
 	a = (ray->direction.y * ray->scalar + 0.5);
-	// printf("a = %f\n", a);
 	return (add_vec(mult_vec_by_scal(new_vec(0, 0, 0), (1 - a)),
 			mult_vec_by_scal(new_vec(255, 255, 255), a)));
 }
-
-// t_vec	color_clamp(t_vec color)
-// {
-// 	if (color.x > 1)
-// 		color.x = 1;
-// 	else if (color.x < 0)
-// 		color.x = 0;
-// 	if (color.y > 1)
-// 		color.y = 1;
-// 	else if (color.y < 0)
-// 		color.y = 0;
-// 	if (color.z > 1)
-// 		color.z = 1;
-// 	else if (color.z < 0)
-// 		color.z = 0;
-// 	return (color);
-// }
-
-// void	put_pixel(mlx_image_t *img, int x, int y, t_vec color)
-// {
-//     double r = color.x;
-//     double g = color.y;
-//     double b = color.z;
-
-//     int ir = (int) (255.999 * r);
-//     int ig = (int) (255.999 * g);
-//     int ib = (int) (255.999 * b);
-// 	color = color_clamp(color);
-// 	if (img == NULL)
-// 		return ;
-//     int color_int = vector_to_color(color);
-// 	mlx_put_pixel(img, x, y, color_int);
-// }
 
 void	ft_color(void *param)
 {
@@ -78,6 +33,7 @@ void	ft_color(void *param)
 	uint32_t	color;
 	t_vec		pixel_center;
 	t_vec		ray_direction;
+	t_intersec	intersection;
 
 	data = (t_data *)param;
 	image = data->image;
@@ -92,13 +48,14 @@ void	ft_color(void *param)
 			ray_direction = subtract_vec(pixel_center, data->camera->origin);
 			data->ray->direction = ray_direction;
 			data->ray->origin = data->camera->origin;
-			if (hit_any_object(&data->obj, data->ray, i, j, data))
-				continue ;
-			color = 0;
-			mlx_put_pixel(image, i, j, color);
+			intersection = hit_any_object(&data->obj, data->ray, data);
+			print_vec(intersection.hit_point, "hit point");
+			print_vec(intersection.normal, "normal");
+			printf("\n\n");
+			// color = 0;
+			// mlx_put_pixel(image, i, j, color);
 		}
 	}
-	// data->ray->f_first = 0;
 }
 
 // -----------------------------------------------------------------------------

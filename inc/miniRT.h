@@ -8,7 +8,7 @@
 #include "vector/vector.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
-#define WIDTH 720
+#define WIDTH 900
 #define HEIGHT 440
 #define SP 0
 #define PL 1
@@ -102,9 +102,9 @@ void viewport_init(t_vp *vp, t_camera *camera);
 
 
 int32_t ft_pixel(t_rgb color);
-bool    hit_any_object(t_obj **obj, t_ray *ray, int i, int j, t_data *data);
-bool	hit_sphere(t_ray *ray, t_sp *sphere);
-bool hit_plane(const t_ray *ray, const t_pl *plane);
+t_intersec	hit_any_object(t_obj **obj, t_ray *ray, t_data *data);
+bool 	hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal);
+bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point, t_vec *normal);
 
 void    init_light(t_light *light, char **data);
 void    init_ambient(t_ambient *ambient, char **data);

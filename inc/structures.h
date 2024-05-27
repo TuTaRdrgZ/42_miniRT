@@ -11,13 +11,19 @@ typedef struct s_operation
 	float			t1;
 	float			temp;
 }					t_op;
-
 typedef struct s_rgb
 {
 	int				r;
 	int				g;
 	int				b;
 }					t_rgb;
+
+typedef struct		s_intersection
+{
+	t_rgb rgb;
+	t_vec hit_point;
+	t_vec normal;
+}					t_intersec;
 
 typedef struct s_ambient
 {

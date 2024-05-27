@@ -48,10 +48,14 @@ void	ft_color(void *param)
 			ray_direction = subtract_vec(pixel_center, data->camera->origin);
 			data->ray->direction = ray_direction;
 			data->ray->origin = data->camera->origin;
-			intersection = hit_any_object(&data->obj, data->ray, data);
-			print_vec(intersection.hit_point, "hit point");
-			print_vec(intersection.normal, "normal");
-			printf("\n\n");
+			intersection = hit_any_object(&data->obj, data->ray);
+			if (intersection.hit == 1)
+			{
+				print_vec(intersection.hit_point, "hit point");
+				print_vec(intersection.normal, "normal");
+				printf("rgb = %d %d %d", intersection.rgb.r,intersection.rgb.g,intersection.rgb.b);
+				printf("\n\n");
+			}
 			// color = 0;
 			// mlx_put_pixel(image, i, j, color);
 		}

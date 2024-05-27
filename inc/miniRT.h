@@ -28,14 +28,11 @@ typedef struct s_ray
   // Punto de origen del rayo
 	t_point	origin;
 
-  // Dirección del rayo
+	// Dirección del rayo
 	t_vec	direction;
 
-  int f_first;
-  double scalar;
-
-
-  // Vector normal a la superficie impactada
+	int f_first;
+	double scalar;
 	t_vec	normal;
 }			t_ray;
 
@@ -102,7 +99,7 @@ void viewport_init(t_vp *vp, t_camera *camera);
 
 
 int32_t ft_pixel(t_rgb color);
-t_intersec	hit_any_object(t_obj **obj, t_ray *ray, t_data *data);
+t_intersec	hit_any_object(t_obj **obj, t_ray *ray);
 bool 	hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal);
 bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point, t_vec *normal);
 

@@ -4,7 +4,7 @@
 #include "miniRT.h"
 #include <stdbool.h>
 #define OK 0
-#define KO 1
+#define KO -1
 #define SP 0
 #define PL 1
 #define CY 2

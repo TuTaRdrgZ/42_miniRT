@@ -23,6 +23,8 @@ typedef struct		s_intersection
 	t_rgb rgb;
 	t_vec hit_point;
 	t_vec normal;
+	int	hit;
+	float	t;
 }					t_intersec;
 
 typedef struct s_ambient

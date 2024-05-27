@@ -9,15 +9,10 @@
 
 // -----------------------------------------------------------------------------
 
-int32_t	ft_pixel(t_rgb color)
+int	ft_pixel(t_rgb color, int intensity)
 {
-	return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | 255);
+	return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | intensity);
 }
-
-// int	vector_to_color(t_vec color)
-// {
-// 	return (ft_pixel(color.x * 255, color.y * 255, color.z * 255, 255));
-// }
 
 t_vec	ray_color(t_ray *ray)
 {
@@ -30,52 +25,18 @@ t_vec	ray_color(t_ray *ray)
 		ray->scalar = tmp.x / ray->direction.x;
 		ray->f_first = 1;
 	}
-	// print_vec(ray->normalize_vec, "unit_direction");
-	// printf("length: %d\n", length_vec(unit_direction));
 	a = (ray->direction.y * ray->scalar + 0.5);
-	// printf("a = %f\n", a);
 	return (add_vec(mult_vec_by_scal(new_vec(0, 0, 0), (1 - a)),
 			mult_vec_by_scal(new_vec(255, 255, 255), a)));
 }
-
-// t_vec	color_clamp(t_vec color)
-// {
-// 	if (color.x > 1)
-// 		color.x = 1;
-// 	else if (color.x < 0)
-// 		color.x = 0;
-// 	if (color.y > 1)
-// 		color.y = 1;
-// 	else if (color.y < 0)
-// 		color.y = 0;
-// 	if (color.z > 1)
-// 		color.z = 1;
-// 	else if (color.z < 0)
-// 		color.z = 0;
-// 	return (color);
-// }
-
-// void	put_pixel(mlx_image_t *img, int x, int y, t_vec color)
-// {
-//     double r = color.x;
-//     double g = color.y;
-//     double b = color.z;
-
-//     int ir = (int) (255.999 * r);
-//     int ig = (int) (255.999 * g);
-//     int ib = (int) (255.999 * b);
-// 	color = color_clamp(color);
-// 	if (img == NULL)
-// 		return ;
-//     int color_int = vector_to_color(color);
-// 	mlx_put_pixel(img, x, y, color_int);
-// }
 
 void	ft_color(void *param)
 {
 	t_data		*data;
 	mlx_image_t	*image;
 	uint32_t	color;
+	t_intersec	intersection;
+	int			intensity;
 	t_vec		pixel_center;
 	t_vec		ray_direction;
 
@@ -85,16 +46,18 @@ void	ft_color(void *param)
 	{
 		for (uint32_t i = 0; i < WIDTH; i++)
 		{
-			color = 255;
+			intensity = data->ambient->ratio;
 			pixel_center = add_vec(data->vp->pixel00,
 					add_vec(mult_vec_by_scal(data->vp->pixel_delta_u, i),
 						mult_vec_by_scal(data->vp->pixel_delta_v, j)));
 			ray_direction = subtract_vec(pixel_center, data->camera->origin);
 			data->ray->direction = ray_direction;
 			data->ray->origin = data->camera->origin;
-			if (hit_any_object(&data->obj, data->ray, i, j, data))
+			intersection = hit_any_object(&data->obj, data->ray, i, j, data);
+			if (!intersection)
 				continue ;
-			color = 0;
+			get_light(&intersection, *data->light, &intensity);
+			color = ft_pixel(intersection.color, intensity);
 			mlx_put_pixel(image, i, j, color);
 		}
 	}

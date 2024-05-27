@@ -20,7 +20,8 @@ SRCS = src/parser/ambient.c \
 	   src/parser/check_dup.c \
 	   src/parser/RGB.c
 SRCS += src/struct_init.c \
-		src/main.c
+		src/main.c \
+		src/get_light.c \
 SRCS += src/objects/init_objects.c \
 		src/objects/init_light.c \
 		src/objects/list_utils.c

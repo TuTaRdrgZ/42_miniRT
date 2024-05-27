@@ -101,7 +101,7 @@ t_point new_point(float x, float y, float z);
 void viewport_init(t_vp *vp, t_camera *camera);
 
 
-int32_t ft_pixel(t_rgb color);
+int32_t ft_pixel(t_rgb color, int intensity);
 bool    hit_any_object(t_obj **obj, t_ray *ray, int i, int j, t_data *data);
 bool	hit_sphere(t_ray *ray, t_sp *sphere);
 bool hit_plane(const t_ray *ray, const t_pl *plane);

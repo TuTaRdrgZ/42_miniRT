@@ -90,10 +90,12 @@ int		ft_pixel(t_rgb color, int intensity);
 t_hit	hit_any_object(t_obj **obj, t_ray *ray);
 bool 	hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal);
 bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point, t_vec *normal);
+bool    hit_cylinder(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *normal);
 bool    simple_check_hit(t_obj **obj, t_ray *ray);
 
 t_rgb	get_plane_rgb(t_pl *plane);
 t_rgb	get_sphere_rgb(t_sp *sphere);
+t_rgb	get_cylinder_rgb(t_cy *cylinder);
 
 void    init_light(t_light *light, char **data);
 void    init_ambient(t_ambient *ambient, char **data);

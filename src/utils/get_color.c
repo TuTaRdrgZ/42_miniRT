@@ -19,3 +19,13 @@ t_rgb	get_plane_rgb(t_pl *plane)
 	color.b = plane->rgb.b;
 	return (color);
 }
+
+t_rgb	get_cylinder_rgb(t_cy *cylinder)
+{
+	t_rgb	color;
+
+	color.r = cylinder->rgb.r;
+	color.g = cylinder->rgb.g;
+	color.b = cylinder->rgb.b;
+	return (color);
+}

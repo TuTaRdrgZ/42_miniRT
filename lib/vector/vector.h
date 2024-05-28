@@ -16,6 +16,7 @@ typedef struct s_vector
 typedef t_vec	t_color;
 typedef t_vec	t_point;
 
+float	distance_vec(t_vec p1, t_vec p2);
 t_vec	add_vec(t_vec v1, t_vec v2);
 t_vec	subtract_vec(t_vec v1, t_vec v2);
 t_vec	mult_vec(t_vec v1, t_vec v2);

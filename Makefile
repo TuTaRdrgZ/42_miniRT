@@ -25,6 +25,7 @@ SRCS += src/objects/init_objects.c \
 		src/objects/init_light.c \
 		src/objects/list_utils.c
 SRCS += src/intersection/hit_sphere.c \
+		src/intersection/hit_plane.c \
 		src/intersection/hit_any.c
 SRCS += src/utils/get_color.c
 

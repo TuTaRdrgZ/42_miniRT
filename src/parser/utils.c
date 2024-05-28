@@ -1,13 +1,13 @@
 #include "parser.h"
 
-int arg_counter(char **matrix)
+int	arg_counter(char **matrix)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (matrix[i])
-        i++;
-    return (i);
+	i = 0;
+	while (matrix[i])
+		i++;
+	return (i);
 }
 
 int	print_error(char *error)
@@ -16,14 +16,14 @@ int	print_error(char *error)
 	return (1);
 }
 
-char *ft_strtrimfree(char *str, char *s)
+char	*ft_strtrimfree(char *str, char *s)
 {
-    char *new;
+	char	*new;
 
-    new = ft_strtrim(str, s);
-    if (str)
-        free(str);
-    return (new);
+	new = ft_strtrim(str, s);
+	if (str)
+		free(str);
+	return (new);
 }
 
 // apply ft_strtrim to a matrix

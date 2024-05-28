@@ -13,25 +13,28 @@ typedef struct s_vector
 	double	z;
 }			t_vec;
 
-t_vec	add_vectors(t_vec v1, t_vec v2);
-t_vec	subtract_vectors(t_vec v1, t_vec v2);
-t_vec	multiply_vectors(t_vec v1, t_vec v2);
+typedef t_vec	t_color;
+typedef t_vec	t_point;
 
-t_vec	multiply_vector_by_scalar(t_vec v1, double scalar);
-t_vec	divide_vector_by_scalar(t_vec v1, double scalar);
+t_vec	add_vec(t_vec v1, t_vec v2);
+t_vec	subtract_vec(t_vec v1, t_vec v2);
+t_vec	mult_vec(t_vec v1, t_vec v2);
 
-double	dot_product(t_vec v1, t_vec v2);
-t_vec	cross_product(t_vec v1, t_vec v2);
+t_vec	mult_vec_by_scal(t_vec v1, double scalar);
+t_vec	div_vec_by_scal(t_vec v1, double scalar);
 
-t_vec	normalize_vector(t_vec v1);
+double	dot_prod(t_vec v1, t_vec v2);
+t_vec	cross_prod(t_vec v1, t_vec v2);
 
-t_vec	new_vector(double x, double y, double z);
-t_vec	invert_vector(t_vec vec);
-t_vec	abs_vector(t_vec color);
+t_vec	normalize_vec(t_vec v1);
 
-double	length_vector(t_vec v1);
-double	length_squared(t_vec vector);
-void	print_vector(t_vec vector);
+t_vec	new_vec(double x, double y, double z);
+t_vec	invert_vec(t_vec vec);
+t_vec	abs_vec(t_vec color);
+
+double	length_vec(t_vec v1);
+double	length_sqrd(t_vec vector);
+void	print_vec(t_vec vector, char *name);
 
 bool	are_equal_vectors(t_vec a, t_vec b);
 

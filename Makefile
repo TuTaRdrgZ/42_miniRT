@@ -40,7 +40,8 @@ INC = inc/miniRT.h \
 
 SILENCE = --no-print-directory
 
-MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/MLX42
+#MLXFLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"          #renesito
+MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/MLX42         #tuta
 MLXLIB = lib/MLX42/build/libmlx42.a
 VECTOR = lib/vector/vector.a
 LIBFTLIB = lib/libft/libft.a

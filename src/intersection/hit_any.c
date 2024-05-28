@@ -40,10 +40,28 @@ float	create_hit_point(t_obj **obj, t_ray *ray, t_hit *hit)
 	return (0);
 }
 
+bool    simple_check_hit(t_obj **obj, t_ray *ray)
+{
+    t_obj   *tmp;
+
+    tmp = *obj;
+    while (tmp)
+    {
+        if (tmp->type == SP)
+            if (hit_sphere(ray, (t_sp *)tmp->object, 0, 0))
+                return (true);
+        if (tmp->type == PL)
+            if (hit_plane(ray, (t_pl *)tmp->object, 0, 0))
+                return (true);
+        //TODO: cylinder
+        tmp = tmp->next;
+    }
+    return (false);
+}
 
 t_hit hit_any_object(t_obj **obj, t_ray *ray)
 {
-    t_obj *tmp = *obj;
+    t_obj *tmp;
     t_hit closest_hit;
     float closest_distance;
     t_hit current_hit;
@@ -51,6 +69,7 @@ t_hit hit_any_object(t_obj **obj, t_ray *ray)
 
     closest_distance = INFINITY;
     closest_hit.didItHit = 0;
+    tmp = *obj;
     while (tmp)
     {
         current_hit.didItHit = 0;

@@ -42,8 +42,11 @@ bool	hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal)
 		if (op.t0 < 0)
 			return (false); // Both t0 and t1 are negative
 	}
-	*hit_point = add_vec(ray->origin, mult_vec_by_scal(ray->direction, op.t0));
-	*normal = subtract_vec(*hit_point, sphere->coordinates);
-	*normal = normalize_vec(*normal);
+    if (hit_point && normal)
+    {
+        *hit_point = add_vec(ray->origin, mult_vec_by_scal(ray->direction, op.t0));
+        *normal = subtract_vec(*hit_point, sphere->coordinates);
+        *normal = normalize_vec(*normal);
+    }
 	return (true);
 }

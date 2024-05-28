@@ -23,19 +23,6 @@
 # define C "\033[1;36m"   /* Bold Cyan */
 # define W "\033[1;37m"   /* Bold White */
 
-typedef struct s_ray
-{
-  // Punto de origen del rayo
-	t_point	origin;
-
-	// Dirección del rayo
-	t_vec	direction;
-
-	int f_first;
-	double scalar;
-	t_vec	normal;
-}			t_ray;
-
 typedef struct s_camera
 {
     int    total;
@@ -79,7 +66,8 @@ typedef struct viewport
   t_vec pixel00;
 }			t_vp;
 
-typedef struct s_data {
+typedef struct s_data
+{
     mlx_t *mlx;
     mlx_image_t* image;
     t_ray *ray;
@@ -102,6 +90,7 @@ int		ft_pixel(t_rgb color, int intensity);
 t_hit	hit_any_object(t_obj **obj, t_ray *ray);
 bool 	hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal);
 bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point, t_vec *normal);
+bool    simple_check_hit(t_obj **obj, t_ray *ray);
 
 t_rgb	get_plane_rgb(t_pl *plane);
 t_rgb	get_sphere_rgb(t_sp *sphere);

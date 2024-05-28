@@ -29,19 +29,15 @@ t_vec	ray_color(t_ray *ray)
 void	ft_color(void *param)
 {
 	t_data		*data;
-	mlx_image_t	*image;
-	uint32_t	color;
 	t_vec		pixel_center;
 	t_vec		ray_direction;
 	t_intersec	intersection;
 
 	data = (t_data *)param;
-	image = data->image;
 	for (uint32_t j = 0; j < HEIGHT; j++)
 	{
 		for (uint32_t i = 0; i < WIDTH; i++)
 		{
-			color = 255;
 			pixel_center = add_vec(data->vp->pixel00,
 					add_vec(mult_vec_by_scal(data->vp->pixel_delta_u, i),
 						mult_vec_by_scal(data->vp->pixel_delta_v, j)));

@@ -1,6 +1,6 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-# include "vector/vector.h"
+# include "vector.h"
 
 typedef struct s_operation
 {

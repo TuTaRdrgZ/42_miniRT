@@ -1,4 +1,4 @@
-#include "lib/vector/vector.h"
+#include "vector.h"
 #include "miniRT.h"
 
 float	distance_vec(t_vec p1, t_vec p2)

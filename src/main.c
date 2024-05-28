@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-int32_t	ft_pixel(t_rgb color)
+int	ft_pixel(t_rgb color, int intensity)
 {
-	return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | 255);
+	return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | intensity);
 }
 
 t_vec	ray_color(t_ray *ray)
@@ -30,6 +30,7 @@ void	ft_color(void *param)
 {
 	t_data		*data;
 	mlx_image_t	*image;
+
 	t_vec		pixel_center;
 	t_vec		ray_direction;
 	t_intersec	intersection;

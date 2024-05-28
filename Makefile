@@ -38,7 +38,7 @@ INC = inc/miniRT.h \
 
 SILENCE = --no-print-directory
 
-MLXFLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/MLX42
 MLXLIB = lib/MLX42/build/libmlx42.a
 VECTOR = lib/vector/vector.a
 LIBFTLIB = lib/libft/libft.a
@@ -61,6 +61,7 @@ $(NAME): $(OBJS) $(INC) Makefile
 
 clean:
 	@rm -f $(OBJS)
+	@rm -f  lib/MLX42/build/CMakeCache.txt
 	@make clean -C lib/libft $(SILENCE)
 	make clean -C lib/MLX42/build
 	@make clean -C lib/vector $(SILENCE)

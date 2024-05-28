@@ -20,6 +20,7 @@ SRC		+=	ft_invert_vector.c
 SRC		+=	ft_length_vector.c
 SRC		+=	ft_length_squared.c
 SRC		+=	ft_print_vector.c
+SRC		+=	ft_distance_vector.c
 
 ###			###			OBJECTS			###			###
 OBJ_D	:=	./obj

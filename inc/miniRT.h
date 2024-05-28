@@ -103,6 +103,9 @@ t_hit	hit_any_object(t_obj **obj, t_ray *ray);
 bool 	hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal);
 bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point, t_vec *normal);
 
+t_rgb	get_plane_rgb(t_pl *plane);
+t_rgb	get_sphere_rgb(t_sp *sphere);
+
 void    init_light(t_light *light, char **data);
 void    init_ambient(t_ambient *ambient, char **data);
 void    init_obj(t_obj **obj, char **obj_data, int type);

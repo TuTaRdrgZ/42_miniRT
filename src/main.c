@@ -29,11 +29,13 @@ t_vec	ray_color(t_ray *ray)
 void	ft_color(void *param)
 {
 	t_data		*data;
+	mlx_image_t	*image;
 	t_vec		pixel_center;
 	t_vec		ray_direction;
 	t_intersec	intersection;
 
 	data = (t_data *)param;
+	image = data->image;
 	for (uint32_t j = 0; j < HEIGHT; j++)
 	{
 		for (uint32_t i = 0; i < WIDTH; i++)
@@ -47,13 +49,14 @@ void	ft_color(void *param)
 			intersection = hit_any_object(&data->obj, data->ray);
 			if (intersection.hit == 1)
 			{
-				print_vec(intersection.hit_point, "hit point");
-				print_vec(intersection.normal, "normal");
-				printf("rgb = %d %d %d", intersection.rgb.r,intersection.rgb.g,intersection.rgb.b);
-				printf("\n\n");
+				// print_vec(intersection.hit_point, "hit point");
+				// print_vec(intersection.normal, "normal");
+				// printf("rgb = %d %d %d", intersection.rgb.r,intersection.rgb.g,intersection.rgb.b);
+				// printf("\n\n");
+			    mlx_put_pixel(image, i, j, ft_pixel(intersection.rgb));
 			}
-			// color = 0;
-			// mlx_put_pixel(image, i, j, color);
+            else
+			    mlx_put_pixel(image, i, j, 255);
 		}
 	}
 }

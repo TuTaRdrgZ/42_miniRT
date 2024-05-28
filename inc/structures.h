@@ -1,6 +1,6 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-# include "vector/vector.h"
+# include "vector.h"
 
 typedef struct s_operation
 {
@@ -11,13 +11,21 @@ typedef struct s_operation
 	float			t1;
 	float			temp;
 }					t_op;
-
 typedef struct s_rgb
 {
 	int				r;
 	int				g;
 	int				b;
 }					t_rgb;
+
+typedef struct		s_intersection
+{
+	t_rgb rgb;
+	t_vec hit_point;
+	t_vec normal;
+	int	hit;
+	float	t;
+}					t_intersec;
 
 typedef struct s_ambient
 {

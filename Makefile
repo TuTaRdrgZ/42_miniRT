@@ -30,7 +30,7 @@ SRCS += src/intersection/hit_sphere.c \
 
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Iinc/ -Ilib/ -g -Wall -Wextra -Werror -Wno-misleading-indentation -Wno-implicit-fallthrough
+CFLAGS = -I inc -I lib -I lib/vector -Ilib/MLX42 -g -Wall -Wextra -Werror -Wno-misleading-indentation -Wno-implicit-fallthrough
 
 INC = inc/miniRT.h \
 	  inc/structures.h
@@ -38,11 +38,10 @@ INC = inc/miniRT.h \
 
 SILENCE = --no-print-directory
 
-MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/
+MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/MLX42
 MLXLIB = lib/MLX42/build/libmlx42.a
 VECTOR = lib/vector/vector.a
 LIBFTLIB = lib/libft/libft.a
-LIB = lib/
 CC = gcc
 
 %c.o: %.c $(INC)
@@ -52,8 +51,10 @@ CC = gcc
 all: $(NAME)
 
 $(NAME): $(OBJS) $(INC) Makefile
-	@make -C lib/vector $(SILENCE)
-	@make -C lib/libft/ $(SILENCE)
+	make -C lib/vector $(SILENCE)
+	make -C lib/libft/ $(SILENCE)
+	cmake -S lib/MLX42 -B lib/MLX42/build
+	make -C lib/MLX42/build
 	$(CC) $(CFLAGS) $(OBJS) $(VECTOR) $(LIBFTLIB) $(MLXLIB) $(MLXFLAGS) -o $(NAME)
 	@echo ""
 	@echo "$(YELLOW)miniRT $(RESET)$(CYAN)$(BOLD)created$(RESET)"
@@ -61,6 +62,7 @@ $(NAME): $(OBJS) $(INC) Makefile
 clean:
 	@rm -f $(OBJS)
 	@make clean -C lib/libft $(SILENCE)
+	make clean -C lib/MLX42/build
 	@make clean -C lib/vector $(SILENCE)
 
 fclean: clean

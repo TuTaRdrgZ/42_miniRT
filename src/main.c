@@ -5,10 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// static mlx_image_t* image;
-
-// -----------------------------------------------------------------------------
-
 int	ft_pixel(t_rgb color, int intensity)
 {
 	return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | intensity);
@@ -34,11 +30,10 @@ void	ft_color(void *param)
 {
 	t_data		*data;
 	mlx_image_t	*image;
-	uint32_t	color;
-	t_intersec	intersection;
-	int			intensity;
+
 	t_vec		pixel_center;
 	t_vec		ray_direction;
+	t_intersec	intersection;
 
 	data = (t_data *)param;
 	image = data->image;
@@ -46,22 +41,25 @@ void	ft_color(void *param)
 	{
 		for (uint32_t i = 0; i < WIDTH; i++)
 		{
-			intensity = data->ambient->ratio;
 			pixel_center = add_vec(data->vp->pixel00,
 					add_vec(mult_vec_by_scal(data->vp->pixel_delta_u, i),
 						mult_vec_by_scal(data->vp->pixel_delta_v, j)));
 			ray_direction = subtract_vec(pixel_center, data->camera->origin);
 			data->ray->direction = ray_direction;
 			data->ray->origin = data->camera->origin;
-			intersection = hit_any_object(&data->obj, data->ray, i, j, data);
-			if (!intersection)
-				continue ;
-			get_light(&intersection, *data->light, &intensity);
-			color = ft_pixel(intersection.color, intensity);
-			mlx_put_pixel(image, i, j, color);
+			intersection = hit_any_object(&data->obj, data->ray);
+			if (intersection.hit == 1)
+			{
+				// print_vec(intersection.hit_point, "hit point");
+				// print_vec(intersection.normal, "normal");
+				// printf("rgb = %d %d %d", intersection.rgb.r,intersection.rgb.g,intersection.rgb.b);
+				// printf("\n\n");
+			    mlx_put_pixel(image, i, j, ft_pixel(intersection.rgb));
+			}
+            else
+			    mlx_put_pixel(image, i, j, 255);
 		}
 	}
-	// data->ray->f_first = 0;
 }
 
 // -----------------------------------------------------------------------------

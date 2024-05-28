@@ -21,7 +21,7 @@ SRCS = src/parser/ambient.c \
 	   src/parser/RGB.c
 SRCS += src/struct_init.c \
 		src/main.c \
-		src/get_light.c \
+		src/get_light.c 
 SRCS += src/objects/init_objects.c \
 		src/objects/init_light.c \
 		src/objects/list_utils.c
@@ -38,7 +38,7 @@ INC = inc/miniRT.h \
 
 SILENCE = --no-print-directory
 
-MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/MLX42
+MLXFLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 MLXLIB = lib/MLX42/build/libmlx42.a
 VECTOR = lib/vector/vector.a
 LIBFTLIB = lib/libft/libft.a

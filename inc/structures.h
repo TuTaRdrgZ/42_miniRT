@@ -18,14 +18,13 @@ typedef struct s_rgb
 	int				b;
 }					t_rgb;
 
-typedef struct		s_intersection
+typedef struct		s_hit
 {
-	t_rgb rgb;
-	t_vec hit_point;
-	t_vec normal;
-	int	hit;
-	float	t;
-}					t_intersec;
+	t_rgb	rgb;
+	t_vec	hit_point;
+	t_vec	normal;
+	int		didItHit;
+}					t_hit;
 
 typedef struct s_ambient
 {

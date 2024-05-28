@@ -30,14 +30,14 @@ t_rgb	get_plane_rgb(t_pl *plane)
 	return (color);
 }
 
-void    set_intersect(t_intersec *intersect, t_vec *normal, t_vec *hit_point)
+void    set_intersect(t_hit *hit, t_vec *normal, t_vec *hit_point)
 {
-    intersect->normal = *normal;
-	intersect->hit_point = *hit_point;
-    intersect->hit = 1;
+	hit->normal = *normal;
+	hit->hit_point = *hit_point;
+	hit->didItHit = 1;
 }
 
-float	create_intersection_point(t_obj **obj, t_ray *ray, t_intersec *intersect)
+float	create_hit_point(t_obj **obj, t_ray *ray, t_hit *hit)
 {
 	t_vec	normal;
 	t_vec	hit_point;
@@ -46,8 +46,8 @@ float	create_intersection_point(t_obj **obj, t_ray *ray, t_intersec *intersect)
 	{
 		if (hit_sphere(ray, (*obj)->object, &hit_point, &normal))
 		{
-            set_intersect(intersect, &normal, &hit_point);
-	        intersect->rgb = get_sphere_rgb((*obj)->object);
+            set_intersect(hit, &normal, &hit_point);
+	        hit->rgb = get_sphere_rgb((*obj)->object);
 			return (distance_vec(ray->origin,
 						subtract_vec(((t_sp *)(*obj)->object)->coordinates,
 							ray->origin)));
@@ -57,41 +57,41 @@ float	create_intersection_point(t_obj **obj, t_ray *ray, t_intersec *intersect)
 	{
 		if (hit_plane(ray, (*obj)->object, &hit_point, &normal))
 		{
-            set_intersect(intersect, &normal, &hit_point);
-			intersect->rgb = get_plane_rgb((*obj)->object);
+            set_intersect(hit, &normal, &hit_point);
+			hit->rgb = get_plane_rgb((*obj)->object);
 			return (distance_vec(ray->origin,
 						subtract_vec(((t_pl *)(*obj)->object)->coordinates,
 							ray->origin)));
 		}
 	}
-    intersect->hit = 0;
+	hit->didItHit = 0;
 	return (0);
 }
 
-t_intersec hit_any_object(t_obj **obj, t_ray *ray)
+t_hit hit_any_object(t_obj **obj, t_ray *ray)
 {
     t_obj *tmp = *obj;
-    t_intersec closest_intersection;
+    t_hit closest_hit;
     float closest_distance = INFINITY;
-    t_intersec current_intersection;
+    t_hit current_hit;
     float       distance;
 
-    closest_intersection.hit = 0;
+    closest_hit.didItHit = 0;
     while (tmp)
     {
-        current_intersection.hit = 0;
-        distance = create_intersection_point(&tmp, ray, &current_intersection);
-        if (current_intersection.hit)
+        current_hit.didItHit = 0;
+        distance = create_hit_point(&tmp, ray, &current_hit);
+        if (current_hit.didItHit)
         {
             if (distance < closest_distance)
             {
-                closest_intersection = current_intersection;
+                closest_hit = current_hit;
                 closest_distance = distance;
             }
         }
         tmp = tmp->next;
     }
-    return (closest_intersection);
+    return (closest_hit);
 }
 
 bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point,

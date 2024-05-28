@@ -96,9 +96,10 @@ void camera_init(t_camera *camera, char **data);
 void data_init(t_data *data, int width, int height);
 t_point new_point(float x, float y, float z);
 void viewport_init(t_vp *vp, t_camera *camera);
+void get_light(t_hit *hit, t_light light, int *intensity);
 
-int32_t ft_pixel(t_rgb color);
-t_intersec	hit_any_object(t_obj **obj, t_ray *ray);
+int		ft_pixel(t_rgb color, int intensity);
+t_hit	hit_any_object(t_obj **obj, t_ray *ray);
 bool 	hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal);
 bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point, t_vec *normal);
 

@@ -14,6 +14,7 @@ float	create_hit_point(t_obj **obj, t_ray *ray, t_hit *hit)
 	t_vec	normal;
 	t_vec	hit_point;
 
+	hit->didItHit = 0;
 	if ((*obj)->type == SP)
 	{
 		if (hit_sphere(ray, (*obj)->object, &hit_point, &normal))
@@ -21,7 +22,7 @@ float	create_hit_point(t_obj **obj, t_ray *ray, t_hit *hit)
 			set_intersect(hit, &normal, &hit_point);
 			hit->rgb = get_sphere_rgb((*obj)->object);
 			return (distance_vec(ray->origin,
-					subtract_vec(((t_sp *)(*obj)->object)->coordinates,
+					subtract_vec(hit_point,
 						ray->origin)));
 		}
 	}
@@ -32,7 +33,7 @@ float	create_hit_point(t_obj **obj, t_ray *ray, t_hit *hit)
 			set_intersect(hit, &normal, &hit_point);
 			hit->rgb = get_plane_rgb((*obj)->object);
 			return (distance_vec(ray->origin,
-					subtract_vec(((t_pl *)(*obj)->object)->coordinates,
+					subtract_vec(hit_point,
 						ray->origin)));
 		}
 	}
@@ -43,30 +44,37 @@ float	create_hit_point(t_obj **obj, t_ray *ray, t_hit *hit)
 			set_intersect(hit, &normal, &hit_point);
 			hit->rgb = get_cylinder_rgb((*obj)->object);
 			return (distance_vec(ray->origin,
-					subtract_vec(((t_cy *)(*obj)->object)->coordinates,
+					subtract_vec(hit_point,
 						ray->origin)));
 		}
 	}
-	hit->didItHit = 0;
-	return (0);
+	return (-1);
 }
 
-bool	simple_check_hit(t_obj **obj, t_ray *ray)
+bool	simple_check_hit(t_obj *obj, t_hit *hit, t_vec light)
 {
 	t_obj	*tmp;
+	t_ray	ray;
 
-	tmp = *obj;
+	ray.origin = add_vec(hit->hit_point, hit->normal);
+	ray.direction = subtract_vec(light, ray.origin);
+	tmp = obj;
 	while (tmp)
 	{
 		if (tmp->type == SP)
-			if (hit_sphere(ray, (t_sp *)tmp->object, 0, 0))
+			if (hit_sphere(&ray, (t_sp *)tmp->object, 0, 0))
 				return (true);
 		if (tmp->type == PL)
-			if (hit_plane(ray, (t_pl *)tmp->object, 0, 0))
+			if (hit_plane(&ray, (t_pl *)tmp->object, 0, 0))
+			{
+				// hit->rgb.r = 255;
+				// hit->rgb.g = 255;
+				// hit->rgb.b = 0;
 				return (true);
-		if (tmp->type == CY)
-			if (hit_cylinder(ray, (t_cy *)tmp->object, 0, 0))
-				tmp = tmp->next;
+			}
+		// if (tmp->type == CY)
+		// 	if (hit_cylinder(ray, (t_cy *)tmp->object, 0, 0))
+		tmp = tmp->next;
 	}
 	return (false);
 }
@@ -86,7 +94,7 @@ t_hit	hit_any_object(t_obj **obj, t_ray *ray)
 	{
 		current_hit.didItHit = 0;
 		distance = create_hit_point(&tmp, ray, &current_hit);
-		if (current_hit.didItHit)
+		if (current_hit.didItHit == 1 && distance != -1)
 		{
 			if (distance < closest_distance)
 			{

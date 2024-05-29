@@ -8,8 +8,8 @@
 #include "vector.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
-#define WIDTH 900
-#define HEIGHT 440
+#define WIDTH 1920
+#define HEIGHT 1080
 #define SP 0
 #define PL 1
 #define CY 2
@@ -91,7 +91,7 @@ t_hit	hit_any_object(t_obj **obj, t_ray *ray);
 bool 	hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal);
 bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point, t_vec *normal);
 bool    hit_cylinder(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *normal);
-bool    simple_check_hit(t_obj **obj, t_ray *ray);
+bool	simple_check_hit(t_obj *obj, t_hit *hit, t_vec light);
 
 t_rgb	get_plane_rgb(t_pl *plane);
 t_rgb	get_sphere_rgb(t_sp *sphere);

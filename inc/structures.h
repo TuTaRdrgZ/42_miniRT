@@ -2,6 +2,19 @@
 # define STRUCTURES_H
 # include "vector.h"
 
+typedef struct s_ray
+{
+  // Punto de origen del rayo
+	t_point	origin;
+
+	// Dirección del rayo
+	t_vec	direction;
+
+	int f_first;
+	double scalar;
+	t_vec	normal;
+}			t_ray;
+
 typedef struct s_operation
 {
 	float			a;
@@ -11,6 +24,7 @@ typedef struct s_operation
 	float			t1;
 	float			temp;
 }					t_op;
+
 typedef struct s_rgb
 {
 	int				r;
@@ -23,6 +37,7 @@ typedef struct		s_hit
 	t_rgb	rgb;
 	t_vec	hit_point;
 	t_vec	normal;
+    t_ray   ray;
 	int		didItHit;
 }					t_hit;
 

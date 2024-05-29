@@ -26,7 +26,10 @@ SRCS += src/objects/init_objects.c \
 		src/objects/init_light.c \
 		src/objects/list_utils.c
 SRCS += src/intersection/hit_sphere.c \
+		src/intersection/hit_plane.c \
+		src/intersection/hit_cylinder.c \
 		src/intersection/hit_any.c
+SRCS += src/utils/get_color.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -38,7 +41,8 @@ INC = inc/miniRT.h \
 
 SILENCE = --no-print-directory
 
-MLXFLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+#MLXFLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"          #renesito
+MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/MLX42         #tuta
 MLXLIB = lib/MLX42/build/libmlx42.a
 VECTOR = lib/vector/vector.a
 LIBFTLIB = lib/libft/libft.a
@@ -61,6 +65,7 @@ $(NAME): $(OBJS) $(INC) Makefile
 
 clean:
 	@rm -f $(OBJS)
+	@rm -f  lib/MLX42/build/CMakeCache.txt
 	@make clean -C lib/libft $(SILENCE)
 	make clean -C lib/MLX42/build
 	@make clean -C lib/vector $(SILENCE)

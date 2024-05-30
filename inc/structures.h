@@ -1,6 +1,6 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-# include "vector.h"
+# include "../lib/vector/vector.h"
 
 typedef struct s_ray
 {

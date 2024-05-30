@@ -55,8 +55,8 @@ void	ft_color(void *param)
 			// hit_to_light.origin = hit.hit_point;
 			// hit_to_light.direction = subtract_vec(data->light->coordinates, hit.hit_point);
 			// t_hit hit_light = hit_any_object(&data->obj, &hit_to_light);
-			// if (hit_light.didItHit == 1)
-			// 	intensity = data->ambient->ratio * 255;
+			if (simple_check_hit(&data->obj, add_vec(hit.hit_point, mult_vec_by_scal(hit.normal, 0.01)), data->light->coordinates))
+				intensity = data->ambient->ratio * 255;
 			if (hit.didItHit == 1)
 			{
 				mlx_put_pixel(image, i, j, ft_pixel(hit.rgb, intensity));

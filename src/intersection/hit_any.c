@@ -51,22 +51,26 @@ float	create_hit_point(t_obj **obj, t_ray *ray, t_hit *hit)
 	return (0);
 }
 
-bool	simple_check_hit(t_obj **obj, t_ray *ray)
+bool	simple_check_hit(t_obj **obj, t_vec hit_point, t_vec light)
 {
 	t_obj	*tmp;
+	t_ray	ray;
+
+	ray.origin = hit_point;
+	ray.direction = subtract_vec(light, hit_point);
 
 	tmp = *obj;
 	while (tmp)
 	{
 		if (tmp->type == SP)
-			if (hit_sphere(ray, (t_sp *)tmp->object, 0, 0))
+			if (hit_sphere(&ray, (t_sp *)tmp->object, 0, 0))
 				return (true);
 		if (tmp->type == PL)
-			if (hit_plane(ray, (t_pl *)tmp->object, 0, 0))
+			if (hit_plane(&ray, (t_pl *)tmp->object, 0, 0))
 				return (true);
-		if (tmp->type == CY)
-			if (hit_cylinder(ray, (t_cy *)tmp->object, 0, 0))
-				tmp = tmp->next;
+		// if (tmp->type == CY)
+		// 	if (hit_cylinder(ray, (t_cy *)tmp->object, 0, 0))
+		tmp = tmp->next;
 	}
 	return (false);
 }

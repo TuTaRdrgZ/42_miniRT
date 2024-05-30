@@ -33,7 +33,7 @@ SRCS += src/utils/get_color.c
 
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -I inc -I lib -I lib/vector -Ilib/MLX42 -g -Wall -Wextra -Werror -Wno-misleading-indentation -Wno-implicit-fallthrough -fsanitize=address
+CFLAGS = -I inc -I lib -I lib/vector -Ilib/MLX42 -g3 -Wall -Wextra -Werror -Wno-misleading-indentation -Wno-implicit-fallthrough -fsanitize=address
 
 INC = inc/miniRT.h \
 	  inc/structures.h

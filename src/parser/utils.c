@@ -13,7 +13,7 @@ int	arg_counter(char **matrix)
 int	print_error(char *error)
 {
 	printf(RED "%s" RST, error);
-	return (1);
+	return (KO);
 }
 
 char	*ft_strtrimfree(char *str, char *s)

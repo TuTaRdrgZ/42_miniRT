@@ -53,32 +53,22 @@ float	create_hit_point(t_obj **obj, t_ray *ray, t_hit *hit)
 
 bool	simple_check_hit(t_obj *obj, t_hit *hit, t_vec light)
 {
-	t_obj	*tmp;
 	t_ray	ray;
+	t_obj	*tmp;
+	float	max_distance;
+	t_hit	current_hit;
+	float	distance;
 
 	ray.origin = add_vec(hit->hit_point, hit->normal);
 	ray.direction = subtract_vec(light, ray.origin);
-	ray.direction = normalize_vec(ray.direction);
-
+	max_distance = distance_vec(ray.origin, light);
 	tmp = obj;
 	while (tmp)
 	{
-		if (tmp->type == SP)
-			if (hit_sphere(&ray, (t_sp *)tmp->object, 0, 0))
-			{
-				hit->rgb = get_sphere_rgb((t_sp *)tmp->object); // Uncomment this line
-				return (true);
-			}
-		if (tmp->type == PL)
-			if (hit_plane(&ray, (t_pl *)tmp->object, 0, 0))
-			{
-				// hit->rgb.r = 255;
-				// hit->rgb.g = 255;
-				// hit->rgb.b = 0;
-				return (true);
-			}
-		// if (tmp->type == CY)
-		// 	if (hit_cylinder(ray, (t_cy *)tmp->object, 0, 0))
+		current_hit.didItHit = 0;
+		distance = create_hit_point(&tmp, &ray, &current_hit);
+		if (current_hit.didItHit == 1 && distance < max_distance)
+            return (true);
 		tmp = tmp->next;
 	}
 	return (false);

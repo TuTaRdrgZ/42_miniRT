@@ -29,7 +29,7 @@ int	read_file(t_data *data, char const *filename)
 			line = get_next_line(fd);
 			continue ;
 		}
-        line = ft_strtrimfree(line, " \n");
+        line = ft_strtrimfree(line, " \n\t");
 		matrix_line = ft_split(line, ' ');
 		if (check_type(data, matrix_line) == KO) // checkeamos el tipo de objeto y que los parametros sean validos
 		{

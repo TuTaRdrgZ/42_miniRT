@@ -39,7 +39,7 @@ void	camera_init(t_camera *camera, char **data)
 	camera->up = new_vec(0, 1, 0);
 	camera->fov_h = ft_atoi(data[3]);
 	camera->aspect_ratio = 16.0 / 9.0;
-	camera->focal_length = 1.0;
+	camera->focal_length = 3.0;
 	camera->aperture = 0.0;
 	camera->total++;
 }

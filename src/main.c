@@ -25,6 +25,15 @@ t_vec	ray_color(t_ray *ray)
 	return (add_vec(mult_vec_by_scal(new_vec(0, 0, 0), (1 - a)),
 			mult_vec_by_scal(new_vec(255, 255, 255), a)));
 }
+t_rgb orig_color(t_rgb color)
+{
+	static t_rgb	orig;
+	t_rgb			tmp;
+
+	tmp = orig;
+	orig = color;
+	return (tmp);
+}
 
 void	ft_color(void *param)
 {
@@ -50,12 +59,13 @@ void	ft_color(void *param)
 			data->ray->direction = ray_direction;
 			data->ray->origin = data->camera->origin;
 			hit = hit_any_object(&data->obj, data->ray);
+			orig_color(hit.rgb);
 			get_light(&hit, *data->light, &intensity);
-			// t_ray hit_to_light;
-			// hit_to_light.origin = hit.hit_point;
-			// hit_to_light.direction = subtract_vec(data->light->coordinates, hit.hit_point);
 			if (simple_check_hit(data->obj, &hit, data->light->coordinates))
+			{
+				//hit.rgb = orig_color(hit.rgb);
 				intensity = data->ambient->ratio * 255;
+			}
 			if (hit.didItHit == 1)
 				mlx_put_pixel(image, i, j, ft_pixel(hit.rgb, intensity));
             else

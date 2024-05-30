@@ -5,9 +5,9 @@ static char	*new_line(char **matrix, char *line, int fd)
 {
 	char	*new;
 
+	free(line);
 	new = get_next_line(fd);
 	ft_free(matrix);
-	free(line);
 	return (new);
 }
 
@@ -35,6 +35,7 @@ int	read_file(t_data *data, char const *filename)
 		{
 			free(line);
 			ft_free(matrix_line);
+            close(fd);
 			return (KO);
 		}
 		line = new_line(matrix_line, line, fd);

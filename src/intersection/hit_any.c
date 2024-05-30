@@ -58,12 +58,17 @@ bool	simple_check_hit(t_obj *obj, t_hit *hit, t_vec light)
 
 	ray.origin = add_vec(hit->hit_point, hit->normal);
 	ray.direction = subtract_vec(light, ray.origin);
+	ray.direction = normalize_vec(ray.direction);
+
 	tmp = obj;
 	while (tmp)
 	{
 		if (tmp->type == SP)
 			if (hit_sphere(&ray, (t_sp *)tmp->object, 0, 0))
+			{
+				hit->rgb = get_sphere_rgb((t_sp *)tmp->object); // Uncomment this line
 				return (true);
+			}
 		if (tmp->type == PL)
 			if (hit_plane(&ray, (t_pl *)tmp->object, 0, 0))
 			{

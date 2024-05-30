@@ -8,8 +8,8 @@
 #include "vector.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 960
+#define HEIGHT 540
 #define SP 0
 #define PL 1
 #define CY 2

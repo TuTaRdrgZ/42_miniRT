@@ -27,7 +27,7 @@ int	check_rgb(char *str)
 	if (!rgb)
 		return (printf("Malloc failed\n"), KO);
 	if (arg_counter(rgb) != 3)
-		return (print_matrix_error(rgb, -1), ft_free(rgb), KO);
+		return (print_error("Error: RGB="), print_matrix_error(rgb, -1), ft_free(rgb), KO);
 	if (check_rgb2(rgb, str))
 		return (KO);
 	rgb_colors[0] = ft_atoi(rgb[0]);

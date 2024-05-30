@@ -169,7 +169,7 @@ void	free_all_objects(t_data *data)
 	}
 }
 
-void	free_data(t_data *data)
+int	free_data(t_data *data)
 {
 	free(data->ray);
 	free(data->camera);
@@ -177,6 +177,7 @@ void	free_data(t_data *data)
 	free(data->ambient);
 	free(data->light);
 	free_all_objects(data);
+    return (1);
 }
 
 int32_t	main(int argc, char **argv)
@@ -193,9 +194,9 @@ int32_t	main(int argc, char **argv)
 		return (printf("Wrong filetype\n"), 1);
 	data_init(&data, WIDTH, HEIGHT);
 	if (read_file(&data, file))
-		return (1);
+        return (free_data(&data));
 	if (check_duplicated(&data))
-		return (1);
+        return (free_data(&data));
 	viewport_init(data.vp, data.camera);
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false)))
 	{

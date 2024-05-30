@@ -73,7 +73,7 @@ t_pl	*init_plane(char **data)
 	return (new);
 }
 
-t_cy	*init_cylinder(char **data)
+t_cy	*init_cylinder(char **data) // TODO: protect split
 {
 	t_cy	*new;
 	char	**split;

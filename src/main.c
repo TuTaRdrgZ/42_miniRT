@@ -5,6 +5,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+t_rgb	new_rgb(double r, double g, double b)
+{
+	t_rgb	rgb;
+
+	rgb.r = r;
+	rgb.g = g;
+	rgb.b = b;
+	return (rgb);
+}
+
 int	ft_pixel(t_rgb color, int intensity)
 {
 	return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | intensity);
@@ -60,14 +70,15 @@ void	ft_color(void *param)
 			data->ray->origin = data->camera->origin;
 			hit = hit_any_object(&data->obj, data->ray);
 			orig_color(hit.rgb);
-			get_light(&hit, *data->light, &intensity);
-			if (simple_check_hit(data->obj, &hit, data->light->coordinates))
-			{
-				//hit.rgb = orig_color(hit.rgb);
-				intensity = data->ambient->ratio * 255;
-			}
+			get_light(&hit, *data->light, &intensity, *data);
+			// if (simple_check_hit(data->obj, &hit, data->light->coordinates))
+			// {
+			// 	//hit.rgb = orig_color(hit.rgb);
+			// 	//intensity = data->ambient->ratio * 255;
+			// 	hit.rgb = fade_to_black(hit.rgb, data->ambient->ratio);
+			// }
 			if (hit.didItHit == 1)
-				mlx_put_pixel(image, i, j, ft_pixel(hit.rgb, intensity));
+				mlx_put_pixel(image, i, j, ft_pixel(hit.rgb, 255));
             else
 				mlx_put_pixel(image, i, j, 255);
 		}
@@ -99,69 +110,69 @@ void	ft_hook(void *param)
 
 // -----------------------------------------------------------------------------
 
-void	print_obj_node(t_obj *node)
-{
-	t_cy	*cy;
+// void	print_obj_node(t_obj *node)
+// {
+// 	t_cy	*cy;
 
-	if (node == NULL)
-	{
-		printf("Nodo NULL\n");
-		return ;
-	}
-	printf("Tipo %d, ", node->type);
-	// Imprimir el objeto según su tipo
-	if (node->type == SP)
-	{
-		t_sp *sp = (t_sp *)node->object; // Convertir el objeto a t_sp
-		printf("Esfera:\n");
-		printf("Nodo: %p\n", node);
-		printf("Coordenadas: (%f, %f, %f)\n", sp->coordinates.x,
-			sp->coordinates.y, sp->coordinates.z);
-		printf("Color RGB: (%d, %d, %d)\n", sp->rgb.r, sp->rgb.g, sp->rgb.b);
-		printf("Diámetro: %f\n", sp->diameter);
-	}
-	else if (node->type == PL)
-	{
-		t_pl *pl = (t_pl *)node->object; // Convertir el objeto a t_pl
-		printf("Plano:\n");
-		printf("Nodo: %p\n", node);
-		printf("Coordenadas: (%f, %f, %f)\n", pl->coordinates.x,
-			pl->coordinates.y, pl->coordinates.z);
-		printf("Normal: (%f, %f, %f)\n", pl->normal.x, pl->normal.y,
-			pl->normal.z);
-		printf("Color RGB: (%d, %d, %d)\n", pl->rgb.r, pl->rgb.g, pl->rgb.b);
-	}
-	else if (node->type == CY)
-	{
-		cy = (t_cy *)node->object;
-		printf("Cilindro:\n");
-		printf("Nodo: %p\n", node);
-		printf("Coordenadas: (%f, %f, %f)\n", cy->coordinates.x,
-			cy->coordinates.y, cy->coordinates.z);
-		printf("Normal: (%f, %f, %f)\n", cy->normal.x, cy->normal.y,
-			cy->normal.z);
-		printf("Diámetro: %f\n", cy->diameter);
-		printf("Altura: %f\n", cy->height);
-		printf("Color RGB: (%d, %d, %d)\n", cy->rgb.r, cy->rgb.g, cy->rgb.b);
-	}
-	else
-	{
-		printf("Tipo de objeto desconocido: %d\n", node->type);
-	}
-	printf("Siguiente nodo: %p\n\n", node->next);
-}
+// 	if (node == NULL)
+// 	{
+// 		printf("Nodo NULL\n");
+// 		return ;
+// 	}
+// 	printf("Tipo %d, ", node->type);
+// 	// Imprimir el objeto según su tipo
+// 	if (node->type == SP)
+// 	{
+// 		t_sp *sp = (t_sp *)node->object; // Convertir el objeto a t_sp
+// 		printf("Esfera:\n");
+// 		printf("Nodo: %p\n", node);
+// 		printf("Coordenadas: (%f, %f, %f)\n", sp->coordinates.x,
+// 			sp->coordinates.y, sp->coordinates.z);
+// 		printf("Color RGB: (%d, %d, %d)\n", sp->rgb.r, sp->rgb.g, sp->rgb.b);
+// 		printf("Diámetro: %f\n", sp->diameter);
+// 	}
+// 	else if (node->type == PL)
+// 	{
+// 		t_pl *pl = (t_pl *)node->object; // Convertir el objeto a t_pl
+// 		printf("Plano:\n");
+// 		printf("Nodo: %p\n", node);
+// 		printf("Coordenadas: (%f, %f, %f)\n", pl->coordinates.x,
+// 			pl->coordinates.y, pl->coordinates.z);
+// 		printf("Normal: (%f, %f, %f)\n", pl->normal.x, pl->normal.y,
+// 			pl->normal.z);
+// 		printf("Color RGB: (%d, %d, %d)\n", pl->rgb.r, pl->rgb.g, pl->rgb.b);
+// 	}
+// 	else if (node->type == CY)
+// 	{
+// 		cy = (t_cy *)node->object;
+// 		printf("Cilindro:\n");
+// 		printf("Nodo: %p\n", node);
+// 		printf("Coordenadas: (%f, %f, %f)\n", cy->coordinates.x,
+// 			cy->coordinates.y, cy->coordinates.z);
+// 		printf("Normal: (%f, %f, %f)\n", cy->normal.x, cy->normal.y,
+// 			cy->normal.z);
+// 		printf("Diámetro: %f\n", cy->diameter);
+// 		printf("Altura: %f\n", cy->height);
+// 		printf("Color RGB: (%d, %d, %d)\n", cy->rgb.r, cy->rgb.g, cy->rgb.b);
+// 	}
+// 	else
+// 	{
+// 		printf("Tipo de objeto desconocido: %d\n", node->type);
+// 	}
+// 	printf("Siguiente nodo: %p\n\n", node->next);
+// }
 
-void	print_all_nodes(t_data *data)
-{
-	t_obj	*obj;
+// void	print_all_nodes(t_data *data)
+// {
+// 	t_obj	*obj;
 
-	obj = data->obj;
-	while (obj)
-	{
-		print_obj_node(obj);
-		obj = obj->next;
-	}
-}
+// 	obj = data->obj;
+// 	while (obj)
+// 	{
+// 		print_obj_node(obj);
+// 		obj = obj->next;
+// 	}
+// }
 
 void	free_all_objects(t_data *data)
 {
@@ -227,7 +238,7 @@ int32_t	main(int argc, char **argv)
 	}
 	data.mlx = mlx;
 	data.image = image;
-	print_all_nodes(&data);
+	//print_all_nodes(&data);
 	mlx_loop_hook(mlx, ft_color, &data);
 	mlx_loop_hook(mlx, ft_hook, &data);
 	mlx_loop(mlx);

@@ -27,9 +27,9 @@ typedef struct s_operation
 
 typedef struct s_rgb
 {
-	int				r;
-	int				g;
-	int				b;
+	double			r;
+	double			g;
+	double			b;
 }					t_rgb;
 
 typedef struct		s_hit

@@ -8,8 +8,8 @@
 #include "vector.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 960
+#define HEIGHT 540
 #define SP 0
 #define PL 1
 #define CY 2
@@ -84,7 +84,8 @@ void camera_init(t_camera *camera, char **data);
 void data_init(t_data *data, int width, int height);
 t_point new_point(float x, float y, float z);
 void viewport_init(t_vp *vp, t_camera *camera);
-void get_light(t_hit *hit, t_light light, int *intensity);
+void get_light(t_hit *hit, t_light light, int *intensity, t_data data);
+t_rgb fade_to_black(t_rgb color, float fade_factor);
 
 int		ft_pixel(t_rgb color, int intensity);
 t_hit	hit_any_object(t_obj **obj, t_ray *ray);

@@ -25,43 +25,23 @@
 
 typedef struct s_camera
 {
-    int    total;
-  // Posición de la cámara en el espacio 3D
+  int    total;
   t_point origin;
+  t_vec   direction;
+  float   aspect_ratio;
+  double   focal_length;
 
-  // Dirección hacia la que apunta la cámara
-  t_vec direction;
-
-  // Vector hacia arriba (para definir la orientación)
-  t_vec up;
-
-  // Campo de visión horizontal (en radianes)
-  float fov_h;
-
-  // Ratio de aspecto (ancho/alto)
-  float aspect_ratio;
-
-  // Distancia focal (para el zoom)
-  float focal_length;
-
-  // Valor de apertura (para el desenfoque)
-  float aperture;
 }			t_camera;
 
 typedef struct viewport
 {
   double vp_width;
   double vp_height;
-
-  // Distance between the camera and the vp
   float focal_length;
-
   t_vec u;
   t_vec v;
-
   t_vec pixel_delta_u;
   t_vec pixel_delta_v;
-
   t_point upper_left;
   t_vec pixel00;
 }			t_vp;

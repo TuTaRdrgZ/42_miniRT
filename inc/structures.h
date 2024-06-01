@@ -61,11 +61,11 @@ typedef struct s_obj
 	int				type;
 	void			*object;
 	struct s_obj	*next;
-}					t_obj;
+}					t_obj;  
 
 typedef struct s_sp
 {
-	t_vec			coordinates;
+	t_vec			coordinates; 
 	t_rgb			rgb;
 	float			diameter;
 	float			radius;

@@ -1,15 +1,26 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-# include "../lib/vector/vector.h"
+
+typedef struct s_vector
+{
+	double x;
+	double y;
+	double z;
+}			t_vec;
+
+typedef t_vec t_point;
+
+typedef struct s_rgb
+{
+	double r;
+	double g;
+	double b;
+}			t_rgb;
 
 typedef struct s_ray
 {
-  // Punto de origen del rayo
 	t_point	origin;
-
-	// Dirección del rayo
 	t_vec	direction;
-
 	int f_first;
 	double scalar;
 	t_vec	normal;
@@ -24,13 +35,6 @@ typedef struct s_operation
 	float			t1;
 	float			temp;
 }					t_op;
-
-typedef struct s_rgb
-{
-	double			r;
-	double			g;
-	double			b;
-}					t_rgb;
 
 typedef struct		s_hit
 {
@@ -87,5 +91,4 @@ typedef struct s_cy
 	t_rgb			rgb;
 }					t_cy;
 
-t_obj				*find_last(t_obj **obj);
 #endif

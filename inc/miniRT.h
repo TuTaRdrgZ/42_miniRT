@@ -5,7 +5,6 @@
 #include <math.h>
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"
-#include "vector.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
 #define WIDTH 960
@@ -37,7 +36,7 @@ typedef struct viewport
 {
   double vp_width;
   double vp_height;
-  float focal_length;
+  double vp_distance;
   t_vec u;
   t_vec v;
   t_vec pixel_delta_u;
@@ -60,28 +59,42 @@ typedef struct s_data
     int     height;
 }            t_data;
 
-void camera_init(t_camera *camera, char **data);
-void data_init(t_data *data, int width, int height);
+void    camera_init(t_camera *camera, char **data);
+void    data_init(t_data *data, int width, int height);
 t_point new_point(float x, float y, float z);
-void viewport_init(t_vp *vp, t_camera *camera);
-void get_light(t_hit *hit, t_light light, int *intensity, t_data data);
-t_rgb fade_to_black(t_rgb color, float fade_factor);
+void    viewport_init(t_vp *vp, t_camera *camera);
+void    apply_lighting(t_hit *hit, t_light light, t_data data);
+t_rgb   new_rgb(double r, double g, double b);
 
-int		ft_pixel(t_rgb color, int intensity);
-t_hit	hit_any_object(t_obj **obj, t_ray *ray);
-bool 	hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal);
-bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point, t_vec *normal);
+int     calculate_pixel_color(t_rgb color);
+t_hit   hit_any_object(t_obj **obj, t_ray *ray);
+bool    hit_sphere(t_ray *ray, t_sp *sphere, t_vec *hit_point, t_vec *normal);
+bool    hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point, t_vec *normal);
 bool    hit_cylinder(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *normal);
-bool	simple_check_hit(t_obj *obj, t_hit *hit, t_vec light);
-bool	solve_quadratic(t_op *op);
+bool    simple_check_hit(t_obj *obj, t_hit *hit, t_vec light);
+bool    solve_quadratic(t_op *op);
 
-t_rgb	get_plane_rgb(t_pl *plane);
-t_rgb	get_sphere_rgb(t_sp *sphere);
-t_rgb	get_cylinder_rgb(t_cy *cylinder);
+t_rgb   get_plane_rgb(t_pl *plane);
+t_rgb   get_sphere_rgb(t_sp *sphere);
+t_rgb   get_cylinder_rgb(t_cy *cylinder);
 
+/********** STRUCT INITIALIZATION **********/
 void    init_light(t_light *light, char **data);
 void    init_ambient(t_ambient *ambient, char **data);
 void    init_obj(t_obj **obj, char **obj_data, int type);
 t_sp    *init_sphere(char **data);
 t_pl    *init_plane(char **data);
+
+/********** VECTORS **********/
+t_vec   add_vec(t_vec a, t_vec b);
+t_vec   subtract_vec(t_vec a, t_vec b);
+t_vec   mult_by_scal(t_vec a, double scalar);
+t_vec   div_by_scal(t_vec a, double scalar);
+t_vec   cross_prod(t_vec a, t_vec b);
+t_vec   normalize_vec(t_vec a);
+t_vec   new_vec(double x, double y, double z);
+float   distance_vec(t_vec a, t_vec b);
+double  dot_prod(t_vec a, t_vec b);
+double  length_vec(t_vec a);
+
 #endif

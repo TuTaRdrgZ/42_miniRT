@@ -16,7 +16,7 @@ bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point,
 		return (false);
     if (hit_point && normal)
     {
-        *hit_point = add_vec(ray->origin, mult_vec_by_scal(ray->direction, t));
+        *hit_point = add_vec(ray->origin, mult_by_scal(ray->direction, t));
         *normal = plane->normal;
     }
 	return (true);

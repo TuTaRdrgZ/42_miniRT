@@ -4,7 +4,7 @@ int	check_light(char **light, int argc)
 {
 	if (argc != 4)
 	{
-		printf(RED "Error\n" RST "Bad arguments: ");
+		printf(RED "Error\n" RST "Bad arguments: (L)");
 		return (print_matrix_error(light, -1), KO);
 	}
 	if (check_coordinates(light[1]))

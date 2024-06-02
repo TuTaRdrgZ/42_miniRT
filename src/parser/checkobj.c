@@ -7,7 +7,10 @@ int	check_cylinder(char **cylinder);
 int	check_obj(char **matrix, int argc, int type)
 {
 	if ((argc != 4 && (type == SP || type == PL)) || (type == CY && argc != 6))
-		return (print_error("Wrong N of obj arguments\n"));
+    {
+		printf(RED "Error\n" RST "Bad arguments: ");
+		return (print_matrix_error(matrix, -1), KO);
+    }
 	if (type == SP)
 		if (check_sphere(matrix))
 			return (KO);

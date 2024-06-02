@@ -47,6 +47,8 @@ int	check_type(t_data *data, char **matrix)
 {
 	int	retval;
 
+    if (!matrix || !matrix[0])
+        return (OK);
 	retval = is_valid_char(matrix);
 	if (retval)
 		return (print_matrix_error(matrix, retval), KO);

@@ -1,6 +1,7 @@
 #include "miniRT.h"
 #include "parser.h"
 
+
 void	print_matrix_error(char **matrix, int arg)
 {
 	int	i;

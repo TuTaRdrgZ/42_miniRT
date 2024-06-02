@@ -6,7 +6,7 @@
 #    By: bautrodr <bautrodr@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/06 10:11:46 by bautrodr          #+#    #+#              #
-#    Updated: 2024/06/01 16:18:28 by tuta             ###   ########.fr        #
+#    Updated: 2024/06/02 09:03:23 by tuta             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRCS = ft_calloc.c \
 	   ft_fprintf/unsigned_int.c \
 	   get_next_line/get_next_line.c \
 	   get_next_line/get_next_line_utils.c \
+	   ft_split_set.c
 
 
 SRCS_BONUS = ft_lstnew.c \

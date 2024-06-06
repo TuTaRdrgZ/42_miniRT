@@ -1,3 +1,4 @@
+#include "include/MLX42/MLX42.h"
 #include "miniRT.h"
 #include "parser.h"
 #include <stdbool.h>
@@ -141,6 +142,13 @@ int	free_data(t_data *data)
     return (1);
 }
 
+void	close_callback(void *param)
+{
+    if (param)
+        exit(0);
+    exit(0);
+}
+
 int32_t	main(int argc, char **argv)
 {
 	t_data		data;
@@ -179,8 +187,8 @@ int32_t	main(int argc, char **argv)
 	data.mlx = mlx;
 	data.image = image;
 	//print_all_nodes(&data);
-	mlx_loop_hook(mlx, ft_hook, &data);
     render_scene(&data);
+	mlx_loop_hook(mlx, ft_hook, &data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	free_data(&data);

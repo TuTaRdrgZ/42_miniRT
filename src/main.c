@@ -41,21 +41,11 @@ void	ft_hook(void *param)
 {
 	t_data		*data;
 	mlx_t		*mlx;
-	mlx_image_t	*image;
 
 	data = (t_data *)param;
 	mlx = data->mlx;
-	image = data->image;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
 }
 
 // -----------------------------------------------------------------------------
@@ -189,8 +179,8 @@ int32_t	main(int argc, char **argv)
 	data.mlx = mlx;
 	data.image = image;
 	//print_all_nodes(&data);
-	mlx_loop_hook(mlx, render_scene, &data);
 	mlx_loop_hook(mlx, ft_hook, &data);
+    render_scene(&data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	free_data(&data);

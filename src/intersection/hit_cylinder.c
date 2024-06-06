@@ -91,7 +91,7 @@ bool	hit_cylinder_caps(const t_ray *ray, t_disk *disk, t_hit *rec)
 bool hit_cylinder(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *normal)
 {
     t_op op;
-    float t = INFINITY;
+    // float t = INFINITY;
 	t_hit hitt;
     bool hit = false;
 	t_disk disk;
@@ -120,7 +120,7 @@ bool hit_cylinder(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *normal)
     }
     if (hit_cylinder_body(ray, cylinder, &op, &hitt))
     {
-        t = op.t0;
+        // t = op.t0;
         *hit_point = hitt.hit_point;
         *normal = hitt.normal;
         hit = true;

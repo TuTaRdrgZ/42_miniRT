@@ -1,4 +1,4 @@
-#include "vector.h"
+#include "miniRT.h"
 
 /*Multiplies every vector coordinate with f.*/
 t_vec	mult_by_scal(t_vec v1, double f)

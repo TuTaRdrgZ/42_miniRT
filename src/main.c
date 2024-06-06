@@ -5,87 +5,37 @@
 #include <stdlib.h>
 #include <string.h>
 
-t_rgb	new_rgb(double r, double g, double b)
+int calculate_pixel_color(t_rgb color)
 {
-	t_rgb	rgb;
-
-	rgb.r = r;
-	rgb.g = g;
-	rgb.b = b;
-	return (rgb);
+	return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | 255);
 }
 
-int	ft_pixel(t_rgb color, int intensity)
-{
-	return ((int)color.r << 24 | (int)color.g << 16 | (int)color.b << 8 | intensity);
-}
-
-t_vec	ray_color(t_ray *ray)
-{
-	t_vec	tmp;
-	double	a;
-
-	if (ray->f_first == 0)
-	{
-		tmp = normalize_vec(ray->direction);
-		ray->scalar = tmp.x / ray->direction.x;
-		ray->f_first = 1;
-	}
-	a = (ray->direction.y * ray->scalar + 0.5);
-	return (add_vec(mult_vec_by_scal(new_vec(0, 0, 0), (1 - a)),
-			mult_vec_by_scal(new_vec(255, 255, 255), a)));
-}
-t_rgb orig_color(t_rgb color)
-{
-	static t_rgb	orig;
-	t_rgb			tmp;
-
-	tmp = orig;
-	orig = color;
-	return (tmp);
-}
-
-void	ft_color(void *param)
+void	render_scene(void *param)
 {
 	t_data		*data;
-	mlx_image_t	*image;
-
-	t_vec		pixel_center;
-	t_vec		ray_direction;
+	t_vec		pixel_pos;
 	t_hit		hit;
-	int 		intensity;
+	int			j;
+	int			i;
 
+	j = -1;
 	data = (t_data *)param;
-	image = data->image;
-	for (uint32_t j = 0; j < HEIGHT; j++)
+	data->ray->origin = data->camera->origin;
+	while (++j < HEIGHT)
 	{
-		for (uint32_t i = 0; i < WIDTH; i++)
+		i = -1;
+		while (++i < WIDTH)
 		{
-			intensity = data->ambient->ratio * 255;
-			pixel_center = add_vec(data->vp->pixel00,
-					add_vec(mult_vec_by_scal(data->vp->pixel_delta_u, i),
-						mult_vec_by_scal(data->vp->pixel_delta_v, j)));
-			ray_direction = subtract_vec(pixel_center, data->camera->origin);
-			data->ray->direction = ray_direction;
-			data->ray->origin = data->camera->origin;
+			pixel_pos = add_vec(data->vp->pixel00,
+					add_vec(mult_by_scal(data->vp->pixel_delta_u, i),
+					mult_by_scal(data->vp->pixel_delta_v, j)));
+			data->ray->direction = subtract_vec(pixel_pos, data->camera->origin);
 			hit = hit_any_object(&data->obj, data->ray);
-			orig_color(hit.rgb);
-			get_light(&hit, *data->light, &intensity, *data);
-			// if (simple_check_hit(data->obj, &hit, data->light->coordinates))
-			// {
-			// 	//hit.rgb = orig_color(hit.rgb);
-			// 	//intensity = data->ambient->ratio * 255;
-			// 	hit.rgb = fade_to_black(hit.rgb, data->ambient->ratio);
-			// }
-			if (hit.didItHit == 1)
-				mlx_put_pixel(image, i, j, ft_pixel(hit.rgb, 255));
-            else
-				mlx_put_pixel(image, i, j, 255);
+			apply_lighting(&hit, *data->light, *data);
+			mlx_put_pixel(data->image, i, j, calculate_pixel_color(hit.rgb));
 		}
 	}
 }
-
-// -----------------------------------------------------------------------------
 
 void	ft_hook(void *param)
 {
@@ -239,7 +189,7 @@ int32_t	main(int argc, char **argv)
 	data.mlx = mlx;
 	data.image = image;
 	//print_all_nodes(&data);
-	mlx_loop_hook(mlx, ft_color, &data);
+	mlx_loop_hook(mlx, render_scene, &data);
 	mlx_loop_hook(mlx, ft_hook, &data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

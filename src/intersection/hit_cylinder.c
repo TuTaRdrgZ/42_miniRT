@@ -1,5 +1,4 @@
 #include "miniRT.h"
-#include "vector.h"
 
 bool solveQuadratic(float a, float b, float c, float *t0, float *t1)
 {
@@ -45,19 +44,19 @@ bool hit_cylinder_body(t_ray *ray, t_cy *cylinder, t_op *op, t_vec *hit_point, t
         if (t < 0)
             return false;
     }
-    *hit_point = add_vec(ray->origin, mult_vec_by_scal(ray->direction, t));
+    *hit_point = add_vec(ray->origin, mult_by_scal(ray->direction, t));
     t_vec to_hit = subtract_vec(*hit_point, cylinder->coordinates);
     float projection = dot_prod(to_hit, axis);
     if (projection < 0 || projection > cylinder->height)
         return false;
-    t_vec base_to_hit = subtract_vec(to_hit, mult_vec_by_scal(axis, projection));
+    t_vec base_to_hit = subtract_vec(to_hit, mult_by_scal(axis, projection));
     *normal = normalize_vec(base_to_hit);
     return true;
 }
 
 bool hit_cylinder_caps(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *normal, float *t)
 {
-    t_vec top_center = add_vec(cylinder->coordinates, mult_vec_by_scal(cylinder->normal, cylinder->height));
+    t_vec top_center = add_vec(cylinder->coordinates, mult_by_scal(cylinder->normal, cylinder->height));
     t_vec cap_normal = normalize_vec(cylinder->normal);
     float denom = dot_prod(ray->direction, cap_normal);
     
@@ -66,7 +65,7 @@ bool hit_cylinder_caps(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *norm
         float t_cap = dot_prod(subtract_vec(cylinder->coordinates, ray->origin), cap_normal) / denom;
         if (t_cap >= 0)
         {
-            t_vec hit = add_vec(ray->origin, mult_vec_by_scal(ray->direction, t_cap));
+            t_vec hit = add_vec(ray->origin, mult_by_scal(ray->direction, t_cap));
             if (length_vec(subtract_vec(hit, cylinder->coordinates)) <= (cylinder->diameter / 2.0f))
             {
                 if (t_cap < *t)
@@ -82,7 +81,7 @@ bool hit_cylinder_caps(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *norm
         t_cap = dot_prod(subtract_vec(top_center, ray->origin), cap_normal) / denom;
         if (t_cap >= 0)
         {
-            t_vec hit = add_vec(ray->origin, mult_vec_by_scal(ray->direction, t_cap));
+            t_vec hit = add_vec(ray->origin, mult_by_scal(ray->direction, t_cap));
             if (length_vec(subtract_vec(hit, top_center)) <= (cylinder->diameter / 2.0f))
             {
                 if (t_cap < *t)

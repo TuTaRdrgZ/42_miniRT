@@ -1,7 +1,6 @@
 #include "miniRT.h"
 #include <float.h>
 #include "structures.h"
-#include "vector.h"
 
 void	set_intersect(t_hit *hit, t_vec *normal, t_vec *hit_point)
 {
@@ -53,7 +52,7 @@ bool	simple_check_hit(t_obj *obj, t_hit *hit, t_vec light)
 	t_hit	current_hit;
 	float	distance;
 
-	ray.origin = add_vec(hit->hit_point, mult_vec_by_scal(hit->normal, 0.01));
+	ray.origin = add_vec(hit->hit_point, mult_by_scal(hit->normal, 0.01));
 	ray.direction = subtract_vec(light, ray.origin);
     max_distance = distance_vec(ray.origin, light);
 	tmp = obj;
@@ -78,6 +77,7 @@ t_hit	hit_any_object(t_obj **obj, t_ray *ray)
 
 	closest_distance = INFINITY;
 	closest_hit.didItHit = 0;
+	closest_hit.rgb = new_rgb(0, 0, 0);
 	tmp = *obj;
 	while (tmp)
 	{

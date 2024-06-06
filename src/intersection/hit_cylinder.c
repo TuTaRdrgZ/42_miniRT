@@ -76,7 +76,7 @@ bool	hit_cylinder_caps(const t_ray *ray, t_disk *disk, t_hit *rec)
 		return (false);
 	oc = subtract_vec(disk->coordinates, ray->origin);
 	t = dot_prod(oc, disk->direction) / denom;
-	if (t <= 1e-6f || t >= INFINITY)
+	if (t <= 1e-6f || t >= rec->t)
 		return (false);
 	p = ray_at(ray, t);
 	to_center = subtract_vec(p, disk->coordinates);
@@ -91,26 +91,23 @@ bool	hit_cylinder_caps(const t_ray *ray, t_disk *disk, t_hit *rec)
 bool hit_cylinder(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *normal)
 {
     t_op op;
-    // float t = INFINITY;
 	t_hit hitt;
     bool hit = false;
 	t_disk disk;
-	t_ray	new_ray;
 
-	new_ray.origin = cylinder->coordinates;
-	new_ray.direction = cylinder->normal;
-	disk.coordinates = cylinder->coordinates;
+    disk.coordinates = cylinder->coordinates;
 	disk.direction = cylinder->normal;
 	disk.radius = cylinder->diameter / 2;
 	hitt.hit_point = new_vec(0, 0, 0);
 	hitt.normal = new_vec(0,0,0);
+    hitt.t = INFINITY;
 	if (hit_cylinder_caps(ray, &disk, &hitt))
     {
         *hit_point = hitt.hit_point;
         *normal = hitt.normal;
         hit = true;
     }
-	disk.coordinates = ray_at(&new_ray, cylinder->height);
+	disk.coordinates = add_vec(cylinder->coordinates, mult_by_scal(normalize_vec(cylinder->normal), cylinder->height));
 	disk.direction = mult_by_scal(cylinder->normal, -1);
 	if (hit_cylinder_caps(ray, &disk, &hitt))
     {
@@ -120,7 +117,6 @@ bool hit_cylinder(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *normal)
     }
     if (hit_cylinder_body(ray, cylinder, &op, &hitt))
     {
-        // t = op.t0;
         *hit_point = hitt.hit_point;
         *normal = hitt.normal;
         hit = true;

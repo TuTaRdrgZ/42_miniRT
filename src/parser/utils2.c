@@ -82,13 +82,19 @@ int	check_ratio(char *str)
 	char	**dotarg;
 
 	dotarg = ft_split(str, '.');
-	if (!dotarg || !dotarg[0] || !dotarg[1] || ft_strlen(str) < 3
-		|| str[0] == '.' || str[ft_strlen(str) - 1] == '.')
+    if (!dotarg)
+        return (print_error("ft_split failed\n"), -1);
+    if (dotarg[0] && !dotarg[1])
+    {
+        if (ft_atoi(dotarg[0]) != 1 && ft_atoi(dotarg[0]) != 0)
+            return (ft_free(dotarg), print_error("Invalid ratio "), KO);
+    }
+	if (!dotarg[0] || str[0] == '.' || str[ft_strlen(str) - 1] == '.')
 		return (printf(RED "Error\n" RST "Wrong argument: "), KO);
-	if (ft_atoi(dotarg[0]) < 0 || ft_atoi(dotarg[1]) < 0
-		|| ft_atoi(dotarg[0]) > 1.0 || ft_atoi(dotarg[1]) > 9
-		|| arg_counter(dotarg) != 2 || (ft_atoi(dotarg[0]) == 1
-			&& ft_atoi(dotarg[1]) != 0))
+	if (dotarg[0] && dotarg[1] && (ft_atof(dotarg[0]) < 0.0 || ft_atof(dotarg[1]) < 0
+		|| ft_atof(dotarg[0]) > 1.0 || ft_atof(dotarg[1]) > 9
+        || (ft_atof(dotarg[0]) == 1
+			&& ft_atof(dotarg[1]) != 0)))
 	{
 		ft_free(dotarg);
 		return (printf(RED "Error\n" RST "Ratio should be in range [0.0,1.0]: "),

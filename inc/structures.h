@@ -10,6 +10,13 @@ typedef struct s_vector
 
 typedef t_vec t_point;
 
+typedef struct s_disk
+{
+	t_vec		coordinates;
+	t_vec		direction;
+	double		radius;
+}				t_disk;
+
 typedef struct s_rgb
 {
 	double r;
@@ -25,6 +32,7 @@ typedef struct s_ray
 	double scalar;
 	t_vec	normal;
 }			t_ray;
+
 
 typedef struct s_operation
 {
@@ -42,6 +50,7 @@ typedef struct		s_hit
 	t_vec	hit_point;
 	t_vec	normal;
     t_ray   ray;
+	double 	t;
 	int		didItHit;
 }					t_hit;
 

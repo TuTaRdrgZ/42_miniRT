@@ -7,8 +7,8 @@
 #include "../lib/libft/libft.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 3840
+#define HEIGHT 2160
 #define SP 0
 #define PL 1
 #define CY 2

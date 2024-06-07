@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:31:58 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/07 01:33:12 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:48:39 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ int check_duplicated(t_data *data)
         return (printf(RED"Error!\nOnly one camera allowed\n"RST), KO); // maybe more in the future
     if (data->light->total != 1)
         return (printf(RED"Error!\nOnly one light allowed\n"RST), KO); // maybe more in the future
+    if (!data->width || !data->height)
+        return (printf(RED"Error!\nNot resolution found\n"RST), KO); // maybe more in the future
     return (OK);
 }

@@ -40,10 +40,10 @@ void	camera_init(t_camera *camera, char **data)
 	camera->total++;
 }
 
-void	data_init(t_data *data, int width, int height)
+void	data_init(t_data *data)
 {
-	data->width = width;
-	data->height = height;
+    data->width = 0;
+    data->height = 0;
 	data->ray = malloc(sizeof(t_ray));
 	if (!data->ray)
 		exit(EXIT_FAILURE);
@@ -63,7 +63,7 @@ void	data_init(t_data *data, int width, int height)
 	data->obj = NULL;
 }
 
-void	viewport_init(t_vp *vp, t_camera *camera)
+void	viewport_init(t_vp *vp, t_camera *camera, int width, int height)
 {
 	vp->vp_height = 2;
 	vp->vp_width = vp->vp_height * camera->aspect_ratio;
@@ -74,8 +74,8 @@ void	viewport_init(t_vp *vp, t_camera *camera)
 	vp->v = normalize_vec(vp->v);
 	vp->u = mult_by_scal(vp->u, vp->vp_width);
 	vp->v = mult_by_scal(vp->v, vp->vp_height);
-	vp->pixel_delta_u = div_by_scal(vp->u, WIDTH);
-	vp->pixel_delta_v = div_by_scal(vp->v, HEIGHT);
+	vp->pixel_delta_u = div_by_scal(vp->u, width);
+	vp->pixel_delta_v = div_by_scal(vp->v, height);
 	vp->upper_left = add_vec(camera->origin, mult_by_scal(camera->direction, vp->vp_distance));
 	vp->upper_left = add_vec(vp->upper_left, mult_by_scal(vp->u, -0.5));
 	vp->upper_left = add_vec(vp->upper_left, mult_by_scal(vp->v, -0.5));

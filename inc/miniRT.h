@@ -7,8 +7,6 @@
 #include "../lib/libft/libft.h"
 #include "structures.h"
 // #include "../src/parser/parser.h"
-#define WIDTH  2560 
-#define HEIGHT 1440
 #define SP 0
 #define PL 1
 #define CY 2
@@ -60,9 +58,9 @@ typedef struct s_data
 }            t_data;
 
 void    camera_init(t_camera *camera, char **data);
-void    data_init(t_data *data, int width, int height);
+void	data_init(t_data *data);
 t_point new_point(float x, float y, float z);
-void    viewport_init(t_vp *vp, t_camera *camera);
+void	viewport_init(t_vp *vp, t_camera *camera, int width, int height);
 void    apply_lighting(t_hit *hit, t_light light, t_data data);
 t_rgb   new_rgb(double r, double g, double b);
 

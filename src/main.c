@@ -4,7 +4,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 int calculate_pixel_color(t_rgb color)
 {
@@ -22,10 +21,10 @@ void	render_scene(void *param)
 	j = -1;
 	data = (t_data *)param;
 	data->ray->origin = data->camera->origin;
-	while (++j < HEIGHT)
+	while (++j < data->height)
 	{
 		i = -1;
-		while (++i < WIDTH)
+		while (++i < data->width)
 		{
 			pixel_pos = add_vec(data->vp->pixel00,
 					add_vec(mult_by_scal(data->vp->pixel_delta_u, i),
@@ -161,18 +160,18 @@ int32_t	main(int argc, char **argv)
 	file = argv[1];
 	if (!is_valid_filetype(file))
 		return (printf("Wrong filetype\n"), 1);
-	data_init(&data, WIDTH, HEIGHT);
+	data_init(&data);
 	if (read_file(&data, file))
         return (free_data(&data));
 	if (check_duplicated(&data))
         return (free_data(&data));
-	viewport_init(data.vp, data.camera);
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false)))
+	viewport_init(data.vp, data.camera, data.width, data.height);
+	if (!(mlx = mlx_init(data.width, data.height, "MLX42", false)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(mlx, WIDTH, HEIGHT)))
+	if (!(image = mlx_new_image(mlx, data.width, data.height)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));

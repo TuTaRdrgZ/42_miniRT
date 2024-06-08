@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int calculate_pixel_color(t_rgb color)
 {
@@ -33,54 +34,6 @@ void	render_scene(void *param)
 			hit = hit_any_object(&data->obj, data->ray);
 			apply_lighting(&hit, *data->light, *data);
 			mlx_put_pixel(data->image, i, j, calculate_pixel_color(hit.rgb));
-		}
-	}
-}
-
-void	render_scene_ssaa(void *param)
-{
-	t_data		*data;
-	t_vec		sample_pos;
-	t_hit		hit;
-	int			j;
-	int			i;
-	int			k;
-	int			l;
-	float		supersampling_factor = 2.0;  // Supersampling factor
-	int			num_samples = supersampling_factor * supersampling_factor;
-
-	j = -1;
-	data = (t_data *)param;
-	data->ray->origin = data->camera->origin;
-	while (++j < data->height)
-	{
-		i = -1;
-		while (++i < data->width)
-		{
-			t_rgb total_color = {0, 0, 0};
-			// Supersampling loop
-			for (k = 0; k < supersampling_factor; k++)
-			{
-				for (l = 0; l < supersampling_factor; l++)
-				{
-					// Calculate sample position within the pixel
-					sample_pos = add_vec(data->vp->pixel00,
-						add_vec(mult_by_scal(data->vp->pixel_delta_u, i + (k + 0.5) / supersampling_factor),
-								mult_by_scal(data->vp->pixel_delta_v, j + (l + 0.5) / supersampling_factor)));
-					data->ray->direction = subtract_vec(sample_pos, data->camera->origin);
-					hit = hit_any_object(&data->obj, data->ray);
-					apply_lighting(&hit, *data->light, *data);
-					total_color.r += hit.rgb.r;
-					total_color.g += hit.rgb.g;
-					total_color.b += hit.rgb.b;
-				}
-			}
-			// Average the color
-			total_color.r /= num_samples;
-			total_color.g /= num_samples;
-			total_color.b /= num_samples;
-			
-			mlx_put_pixel(data->image, i, j, calculate_pixel_color(total_color));
 		}
 	}
 }
@@ -234,10 +187,14 @@ int32_t	main(int argc, char **argv)
 	data.mlx = mlx;
 	data.image = image;
 	//print_all_nodes(&data);
-    if (SSAA)
-        render_scene_ssaa(&data);
-    else
-        render_scene(&data);
+	clock_t t;
+	t = clock();
+	if (SSAA > 1)
+		render_scene_ssaa(&data);
+	else
+		render_scene(&data);
+	t = clock() - t;
+	printf("\rRender time: %ims\n", (int)((double)t / CLOCKS_PER_SEC * 1000));
 	mlx_loop_hook(mlx, ft_hook, &data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

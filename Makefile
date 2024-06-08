@@ -27,7 +27,7 @@ FILES_PAR = ambient.c camera.c checkfile.c checktype.c checkobj.c light.c \
 			coordinates.c readfile.c utils.c utils2.c check_dup.c RGB.c
 FILES_INT = hit_sphere.c hit_plane.c hit_cylinder.c hit_any.c
 FILES_UTI = get_color.c struct_init.c
-FILES_RAY = compute_rays.c lighting.c
+FILES_RAY = compute_rays.c lighting.c ssaa.c
 FILES_VEC = add_vectors.c cross_product.c distance_vector.c divide_vector_by_scalar.c \
 			dot_product.c length_vector.c multiply_vector_by_scalar.c new_vector.c \
 			normalize_vector.c subtract_vectors.c

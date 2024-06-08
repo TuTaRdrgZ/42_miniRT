@@ -6,11 +6,11 @@
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"
 #include "structures.h"
-// #include "../src/parser/parser.h"
 #define SP 0
 #define PL 1
 #define CY 2
-#define SSAA 1
+
+#define SSAA 4
 
 # define RST "\033[0m"    /* Reset to default color */
 # define RED "\033[1;31m" /* Bold Red */
@@ -96,4 +96,6 @@ float   distance_vec(t_vec a, t_vec b);
 double  dot_prod(t_vec a, t_vec b);
 double  length_vec(t_vec a);
 
+/********* SUPERSAMPLING **************/
+void	render_scene_ssaa(void *param);
 #endif

@@ -1,6 +1,14 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+typedef struct s_ssaa
+{
+	int	i;
+	int	j;
+	int	k;
+	int	l;
+}			t_ssaa;
+
 typedef struct s_vector
 {
 	double x;

@@ -10,6 +10,7 @@
 #define SP 0
 #define PL 1
 #define CY 2
+#define SSAA 1
 
 # define RST "\033[0m"    /* Reset to default color */
 # define RED "\033[1;31m" /* Bold Red */

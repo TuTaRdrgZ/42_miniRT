@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multiply_vector_by_scalar.c                        :+:      :+:    :+:   */
+/*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/09 18:59:14 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 18:59:15 by bautrodr         ###   ########.fr       */
+/*   Created: 2024/06/09 19:03:29 by bautrodr          #+#    #+#             */
+/*   Updated: 2024/06/09 19:04:27 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/*Multiplies every vector coordinate with f.*/
-t_vec	mult_by_scal(t_vec v1, double f)
+static void	free_all_objects(t_data *data)
 {
-	t_vec	result;
+	t_obj	*obj;
+	t_obj	*tmp;
 
-	result = v1;
-	result.x *= f;
-	result.y *= f;
-	result.z *= f;
-	return (result);
+	obj = data->obj;
+	while (obj)
+	{
+		tmp = obj->next;
+		if (obj->object)
+			free(obj->object);
+		free(obj);
+		obj = tmp;
+	}
+}
+
+int	free_data(t_data *data)
+{
+	free(data->ray);
+	free(data->camera);
+	free(data->vp);
+	free(data->ambient);
+	free(data->light);
+	free_all_objects(data);
+	return (1);
 }

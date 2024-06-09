@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:32:37 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/07 01:33:12 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:50:39 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	process_line(t_data *data, char **line, char **matrix_line, int fd)
 		(*line)[ft_strlen(*line) - 1] = '\0';
 	matrix_line = ft_split_set(*line, " \t\v\f\r");
 	if (!(matrix_line))
-		exit(-1); // TODO : exit error
+		exit_error("Malloc failed");
 	trim_matrix(matrix_line, " \n");
 	if (check_type(data, matrix_line) == KO)
 	{

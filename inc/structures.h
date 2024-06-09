@@ -1,46 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/09 18:08:13 by bautrodr          #+#    #+#             */
+/*   Updated: 2024/06/09 18:09:29 by bautrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
 typedef struct s_ssaa
 {
-	int	i;
-	int	j;
-	int	k;
-	int	l;
-}			t_ssaa;
+	int				i;
+	int				j;
+	int				k;
+	int				l;
+}					t_ssaa;
 
 typedef struct s_vector
 {
-	double x;
-	double y;
-	double z;
-}			t_vec;
+	double			x;
+	double			y;
+	double			z;
+}					t_vec;
 
-typedef t_vec t_point;
+typedef t_vec		t_point;
 
-typedef struct s_disk
+typedef struct s_cap
 {
-	t_vec		coordinates;
-	t_vec		direction;
-	double		radius;
-}				t_disk;
+	t_vec			coordinates;
+	t_vec			direction;
+	double			radius;
+}					t_cap;
 
 typedef struct s_rgb
 {
-	double r;
-	double g;
-	double b;
-}			t_rgb;
+	double			r;
+	double			g;
+	double			b;
+}					t_rgb;
 
 typedef struct s_ray
 {
-	t_point	origin;
-	t_vec	direction;
-	int f_first;
-	double scalar;
-	t_vec	normal;
-}			t_ray;
-
+	t_point			origin;
+	t_vec			direction;
+	int				f_first;
+	double			scalar;
+	t_vec			normal;
+}					t_ray;
 
 typedef struct s_operation
 {
@@ -52,26 +63,26 @@ typedef struct s_operation
 	float			temp;
 }					t_op;
 
-typedef struct		s_hit
+typedef struct s_hit
 {
-	t_rgb	rgb;
-	t_vec	hit_point;
-	t_vec	normal;
-    t_ray   ray;
-	double 	t;
-	int		didItHit;
+	t_rgb			rgb;
+	t_vec			hit_point;
+	t_vec			normal;
+	t_ray			ray;
+	double			t;
+	int				did_it_hit;
 }					t_hit;
 
 typedef struct s_ambient
 {
-	int total; // for checking if there are more than 1 ambient light
+	int				total;
 	double			ratio;
 	t_rgb			rgb;
 }					t_ambient;
 
 typedef struct s_light
 {
-	int total; // currently not needed
+	int				total;
 	double			ratio;
 	t_rgb			rgb;
 	t_vec			coordinates;
@@ -82,11 +93,11 @@ typedef struct s_obj
 	int				type;
 	void			*object;
 	struct s_obj	*next;
-}					t_obj;  
+}					t_obj;
 
 typedef struct s_sp
 {
-	t_vec			coordinates; 
+	t_vec			coordinates;
 	t_rgb			rgb;
 	float			diameter;
 	float			radius;

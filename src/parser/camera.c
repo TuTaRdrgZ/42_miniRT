@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:31:54 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/07 01:33:12 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:47:39 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_normalized_vector(char *str)
 
 	nor_matrix = ft_split(str, ',');
 	if (!nor_matrix)
-		exit(-1);
+		exit_error("Malloc failed");
 	i = -1;
 	if (arg_counter(nor_matrix) != 3)
 		return (printf(RED "Error\nInvalid normalized vector: %s\n" RST, str),

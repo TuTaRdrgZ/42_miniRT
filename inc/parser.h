@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:31:08 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/07 01:33:37 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:44:10 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 
 int		is_valid_filetype(char *str);
 int		read_file(t_data *data, char const *filename);
-void	trim_matrix(char **matrix, char *s); // probably wont need it
+void	trim_matrix(char **matrix, char *s);
 int		check_type(t_data *data, char **matrix);
 void	ft_free(char **matrix);
 int		is_valid_char(char **matrix);
 int		is_valid_filetype(char *str);
 int		print_error(char *error);
 int		arg_counter(char **matrix);
-int		check_ambient(char **ambient, int argc /*, t_data *data*/);
+int		check_ambient(char **ambient, int argc);
 char	*ft_strtrimfree(char *str, char *s);
 void	print_matrix_error(char **matrix, int arg);
 int		check_camera(char **camera, int argc);

@@ -1,3 +1,5 @@
+R	1280	800
+
 #Camera        #Coord                #Orientation     #H-FOV
 C              0,0,0                 0,0,-1.0         100
 

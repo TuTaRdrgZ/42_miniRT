@@ -6,20 +6,20 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:32:26 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/07 15:41:25 by tuta             ###   ########.fr       */
+/*   Updated: 2024/06/09 18:51:50 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 
-int check_resolution(t_data *data, char **matrix, int argc)
+int	check_resolution(t_data *data, char **matrix, int argc)
 {
-    if (argc != 3)
-        return (print_error("Invalid Resolution\n"), KO);
-    data->width = ft_atoi(matrix[1]);
-    data->height = ft_atoi(matrix[2]);
-    return (OK);
+	if (argc != 3)
+		return (print_error("Invalid Resolution\n"), KO);
+	data->width = ft_atoi(matrix[1]);
+	data->height = ft_atoi(matrix[2]);
+	return (OK);
 }
 
 static int	check_type3(t_data *data, char **matrix)
@@ -38,12 +38,12 @@ static int	check_type3(t_data *data, char **matrix)
 		init_obj(&(data->obj), matrix, CY);
 		return (OK);
 	}
-    else if (!ft_strcmp(matrix[0], "R"))
-    {
-        if (check_resolution(data, matrix, arg_counter(matrix)))
-            return (KO);
-        return (OK);
-    }
+	else if (!ft_strcmp(matrix[0], "R"))
+	{
+		if (check_resolution(data, matrix, arg_counter(matrix)))
+			return (KO);
+		return (OK);
+	}
 	else
 	{
 		printf(RED "Error\nINVALID ID:" RST " \"%s\"\n", matrix[0]);
@@ -75,8 +75,8 @@ int	check_type(t_data *data, char **matrix)
 {
 	int	retval;
 
-    if (!matrix || !matrix[0])
-        return (OK);
+	if (!matrix || !matrix[0])
+		return (OK);
 	retval = is_valid_char(matrix);
 	if (retval)
 		return (print_matrix_error(matrix, retval), KO);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_init.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/09 18:57:45 by bautrodr          #+#    #+#             */
+/*   Updated: 2024/06/09 18:57:53 by bautrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 #include "parser.h"
 
@@ -42,8 +54,8 @@ void	camera_init(t_camera *camera, char **data)
 
 void	data_init(t_data *data)
 {
-    data->width = 0;
-    data->height = 0;
+	data->width = 0;
+	data->height = 0;
 	data->ray = malloc(sizeof(t_ray));
 	if (!data->ray)
 		exit(EXIT_FAILURE);
@@ -68,7 +80,8 @@ void	viewport_init(t_vp *vp, t_camera *camera, int width, int height)
 	vp->vp_height = 2;
 	vp->vp_width = vp->vp_height * camera->aspect_ratio;
 	vp->vp_distance = camera->focal_length;
-	vp->u = cross_prod(camera->direction, add_vec(camera->direction, new_vec(0, 1, 0)));
+	vp->u = cross_prod(camera->direction, add_vec(camera->direction, new_vec(0,
+					1, 0)));
 	vp->v = cross_prod(camera->direction, vp->u);
 	vp->u = normalize_vec(vp->u);
 	vp->v = normalize_vec(vp->v);
@@ -76,11 +89,10 @@ void	viewport_init(t_vp *vp, t_camera *camera, int width, int height)
 	vp->v = mult_by_scal(vp->v, vp->vp_height);
 	vp->pixel_delta_u = div_by_scal(vp->u, width);
 	vp->pixel_delta_v = div_by_scal(vp->v, height);
-	vp->upper_left = add_vec(camera->origin, mult_by_scal(camera->direction, vp->vp_distance));
+	vp->upper_left = add_vec(camera->origin, mult_by_scal(camera->direction,
+				vp->vp_distance));
 	vp->upper_left = add_vec(vp->upper_left, mult_by_scal(vp->u, -0.5));
 	vp->upper_left = add_vec(vp->upper_left, mult_by_scal(vp->v, -0.5));
-	vp->pixel00 = add_vec(vp->upper_left, mult_by_scal(vp->pixel_delta_u,
-				0.5));
-	vp->pixel00 = add_vec(vp->pixel00, mult_by_scal(vp->pixel_delta_v,
-				0.5));
+	vp->pixel00 = add_vec(vp->upper_left, mult_by_scal(vp->pixel_delta_u, 0.5));
+	vp->pixel00 = add_vec(vp->pixel00, mult_by_scal(vp->pixel_delta_v, 0.5));
 }

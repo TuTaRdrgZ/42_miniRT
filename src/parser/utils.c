@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:32:44 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/07 01:33:12 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:44:20 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	*ft_strtrimfree(char *str, char *s)
 	return (new);
 }
 
-// apply ft_strtrim to a matrix
 void	trim_matrix(char **matrix, char *s)
 {
 	int		i;

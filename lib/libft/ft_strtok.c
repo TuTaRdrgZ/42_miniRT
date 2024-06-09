@@ -6,15 +6,15 @@
 /*   By: tuta <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 14:07:40 by tuta              #+#    #+#             */
-/*   Updated: 2024/06/01 15:13:38 by tuta             ###   ########.fr       */
+/*   Updated: 2024/06/09 18:16:34 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char				*ft_strtok_r(char *str, const char *sep, char **lasts)
+char	*ft_strtok_r(char *str, const char *sep, char **lasts)
 {
-	char			*w;
+	char	*w;
 
 	if (!str)
 		str = *lasts;
@@ -31,10 +31,9 @@ char				*ft_strtok_r(char *str, const char *sep, char **lasts)
 	return (w);
 }
 
-char				*ft_strtok(char *str, const char *delim)
+char	*ft_strtok(char *str, const char *delim)
 {
-	static char		*ptr;
+	static char	*ptr;
 
 	return (ft_strtok_r(str, delim, &ptr));
 }
-

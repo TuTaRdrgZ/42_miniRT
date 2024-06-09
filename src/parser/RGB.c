@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:32:40 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/07 01:33:12 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:42:26 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ int	check_rgb(char *str)
 
 	rgb = ft_split(str, ',');
 	if (!rgb)
-		return (printf("Malloc failed\n"), KO);
+		exit_error("Malloc failed");
 	if (arg_counter(rgb) != 3)
-		return (print_error("Error: RGB="), print_matrix_error(rgb, -1), ft_free(rgb), KO);
+		return (print_error("Error: RGB="), print_matrix_error(rgb, -1),
+			ft_free(rgb), KO);
 	if (check_rgb2(rgb, str))
 		return (KO);
 	rgb_colors[0] = ft_atoi(rgb[0]);

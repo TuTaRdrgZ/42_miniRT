@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_plane.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/09 17:33:26 by bautrodr          #+#    #+#             */
+/*   Updated: 2024/06/09 17:43:58 by bautrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
-bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point,
-		t_vec *normal)
+bool	hit_plane(const t_ray *ray, const t_pl *plane, t_hit *hit)
 {
-	double dn;
-	double t;
-	double d;
+	double	dn;
+	double	t;
+	double	d;
 
 	dn = dot_prod(ray->direction, plane->normal);
 	if (fabs(dn) < 0.00000001)
@@ -14,10 +25,7 @@ bool	hit_plane(const t_ray *ray, const t_pl *plane, t_vec *hit_point,
 	t = (d - dot_prod(plane->normal, ray->origin)) / dn;
 	if (t < 0.00000001 || t > 2147483647)
 		return (false);
-    if (hit_point && normal)
-    {
-        *hit_point = add_vec(ray->origin, mult_by_scal(ray->direction, t));
-        *normal = plane->normal;
-    }
+	hit->hit_point = add_vec(ray->origin, mult_by_scal(ray->direction, t));
+	hit->normal = plane->normal;
 	return (true);
 }

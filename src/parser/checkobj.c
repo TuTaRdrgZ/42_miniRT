@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:32:21 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/07 01:33:12 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:52:55 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	check_cylinder(char **cylinder);
 int	check_obj(char **matrix, int argc, int type)
 {
 	if ((argc != 4 && (type == SP || type == PL)) || (type == CY && argc != 6))
-    {
+	{
 		printf(RED "Error\n" RST "Bad arguments: ");
 		return (print_matrix_error(matrix, -1), KO);
-    }
+	}
 	if (type == SP)
 		if (check_sphere(matrix))
 			return (KO);
@@ -65,7 +65,7 @@ int	check_cylinder(char **cylinder)
 		return (KO);
 	if (check_diameter(cylinder[3]) < 0)
 		return (KO);
-	if (check_diameter(cylinder[4]) < 0) // actually checks the height
+	if (check_diameter(cylinder[4]) < 0)
 		return (KO);
 	if (check_rgb(cylinder[5]))
 		return (KO);

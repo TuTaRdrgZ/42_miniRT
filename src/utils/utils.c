@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multiply_vector_by_scalar.c                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/09 18:59:14 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 18:59:15 by bautrodr         ###   ########.fr       */
+/*   Created: 2024/06/09 18:27:37 by bautrodr          #+#    #+#             */
+/*   Updated: 2024/06/09 18:37:07 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/*Multiplies every vector coordinate with f.*/
-t_vec	mult_by_scal(t_vec v1, double f)
+t_obj	*find_last(t_obj **obj)
 {
-	t_vec	result;
+	t_obj	*temp;
 
-	result = v1;
-	result.x *= f;
-	result.y *= f;
-	result.z *= f;
-	return (result);
+	if (!*obj)
+		return (*obj);
+	temp = *obj;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
+}
+
+void	exit_error(char *msg)
+{
+	printf(RED"%s\n"RST, msg);
+	exit (-1);
 }

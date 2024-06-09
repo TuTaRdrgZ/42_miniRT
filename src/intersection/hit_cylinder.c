@@ -1,125 +1,86 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_cylinder.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/09 17:57:54 by bautrodr          #+#    #+#             */
+/*   Updated: 2024/06/09 18:04:47 by bautrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
-bool solveQuadratic(float a, float b, float c, float *t0, float *t1)
+static bool	solve_cylinder_intersection(t_ray *ray, t_cy *cylinder, t_op *op)
 {
-    float discriminant = b * b - 4 * a * c;
-    if (discriminant < 0)
-        return false;
-    if (discriminant == 0)
-    {
-        *t0 = -0.5 * b / a;
-        *t1 = *t0;
-    }
-    else
-    {
-        float sqrt_discriminant = sqrt(discriminant);
-        *t0 = (-b - sqrt_discriminant) / (2 * a);
-        *t1 = (-b + sqrt_discriminant) / (2 * a);
-    }
-    if (*t0 > *t1)
-    {
-        float temp = *t0;
-        *t0 = *t1;
-        *t1 = temp;
-    }
-    return true;
-}
-
-bool hit_cylinder_body(t_ray *ray, t_cy *cylinder, t_op *op, t_hit *hit)
-{
-    t_vec oc = subtract_vec(ray->origin, cylinder->coordinates);
-    t_vec axis = normalize_vec(cylinder->normal);
-    t_vec dir_cross_axis = cross_prod(ray->direction, axis);
-    t_vec oc_cross_axis = cross_prod(oc, axis);
-    
-    op->a = dot_prod(dir_cross_axis, dir_cross_axis);
-    op->b = 2 * dot_prod(dir_cross_axis, oc_cross_axis);
-    op->c = dot_prod(oc_cross_axis, oc_cross_axis) - (cylinder->diameter / 2.0f) * (cylinder->diameter / 2.0f);
-    if (!solveQuadratic(op->a, op->b, op->c, &op->t0, &op->t1))
-        return false;
-   	hit->t = op->t0;
-    if (hit->t < 0)
-    {
-        hit->t = op->t1;
-        if (hit->t < 0)
-            return false;
-    }
-    hit->hit_point = add_vec(ray->origin, mult_by_scal(ray->direction, hit->t));
-    t_vec to_hit = subtract_vec(hit->hit_point, cylinder->coordinates);
-    float projection = dot_prod(to_hit, axis);
-    if (projection < 0 || projection > cylinder->height)
-        return false;
-    t_vec base_to_hit = subtract_vec(to_hit, mult_by_scal(axis, projection));
-    hit->normal = normalize_vec(base_to_hit);
-    return true;
-}
-
-t_vec	ray_at(const t_ray *ray, double t)
-{
-	t_vec		dir;
-
-	dir = ray->direction;
-	dir = mult_by_scal(dir, t);
-	return (add_vec(ray->origin, dir));
-}
-
-bool	hit_cylinder_caps(const t_ray *ray, t_disk *disk, t_hit *rec)
-{
-	double	denom;
 	t_vec	oc;
-	double	t;
-	t_vec	p;
-	t_vec	to_center;
+	t_vec	axis;
+	t_vec	dir_cross_axis;
+	t_vec	oc_cross_axis;
 
-	denom = dot_prod(disk->direction, ray->direction);
-	if (fabs(denom) < 1e-6f)
+	oc = subtract_vec(ray->origin, cylinder->coordinates);
+	axis = normalize_vec(cylinder->normal);
+	dir_cross_axis = cross_prod(ray->direction, axis);
+	oc_cross_axis = cross_prod(oc, axis);
+	op->a = dot_prod(dir_cross_axis, dir_cross_axis);
+	op->b = 2 * dot_prod(dir_cross_axis, oc_cross_axis);
+	op->c = dot_prod(oc_cross_axis, oc_cross_axis) - (cylinder->diameter / 2.0f)
+		* (cylinder->diameter / 2.0f);
+	if (!solve_quadratic(op))
 		return (false);
-	oc = subtract_vec(disk->coordinates, ray->origin);
-	t = dot_prod(oc, disk->direction) / denom;
-	if (t <= 1e-6f || t >= rec->t)
-		return (false);
-	p = ray_at(ray, t);
-	to_center = subtract_vec(p, disk->coordinates);
-	if (dot_prod(to_center, to_center) > disk->radius * disk->radius)
-		return (false);
-	rec->t = t;
-	rec->hit_point = p;
-	rec->normal = mult_by_scal(disk->direction, -1);
 	return (true);
 }
 
-bool hit_cylinder(t_ray *ray, t_cy *cylinder, t_vec *hit_point, t_vec *normal)
+static bool	validate_hit_point(t_ray *ray, t_cy *cylinder, t_op *op, t_hit *hit)
 {
-    t_op op;
-	t_hit hitt;
-    bool hit = false;
-	t_disk disk;
+	t_vec	to_hit;
+	t_vec	base_to_hit;
+	t_vec	axis;
+	float	projection;
 
-    disk.coordinates = cylinder->coordinates;
-	disk.direction = cylinder->normal;
-	disk.radius = cylinder->diameter / 2;
-	hitt.hit_point = new_vec(0, 0, 0);
-	hitt.normal = new_vec(0,0,0);
-    hitt.t = INFINITY;
-	if (hit_cylinder_caps(ray, &disk, &hitt))
-    {
-        *hit_point = hitt.hit_point;
-        *normal = hitt.normal;
-        hit = true;
-    }
-	disk.coordinates = add_vec(cylinder->coordinates, mult_by_scal(normalize_vec(cylinder->normal), cylinder->height));
-	disk.direction = mult_by_scal(cylinder->normal, -1);
-	if (hit_cylinder_caps(ray, &disk, &hitt))
-    {
-        *hit_point = hitt.hit_point;
-        *normal = hitt.normal;
-        hit = true;
-    }
-    if (hit_cylinder_body(ray, cylinder, &op, &hitt))
-    {
-        *hit_point = hitt.hit_point;
-        *normal = hitt.normal;
-        hit = true;
-    }
-    return hit;
+	hit->t = op->t0;
+	if (hit->t < 0)
+	{
+		hit->t = op->t1;
+		if (hit->t < 0)
+			return (false);
+	}
+	hit->hit_point = add_vec(ray->origin, mult_by_scal(ray->direction, hit->t));
+	axis = normalize_vec(cylinder->normal);
+	to_hit = subtract_vec(hit->hit_point, cylinder->coordinates);
+	projection = dot_prod(to_hit, axis);
+	if (projection < 0 || projection > cylinder->height)
+		return (false);
+	base_to_hit = subtract_vec(to_hit, mult_by_scal(axis, projection));
+	hit->normal = normalize_vec(base_to_hit);
+	return (true);
+}
+
+static bool	hit_cylinder_body(t_ray *ray, t_cy *cylinder, t_op *op, t_hit *hit)
+{
+	if (!solve_cylinder_intersection(ray, cylinder, op))
+		return (false);
+	if (!validate_hit_point(ray, cylinder, op, hit))
+		return (false);
+	return (true);
+}
+
+bool	hit_cylinder(t_ray *ray, t_cy *cylinder, t_hit *new_hit)
+{
+	t_op	op;
+	t_hit	hit;
+	bool	result;
+
+	hit.hit_point = new_vec(0, 0, 0);
+	hit.normal = new_vec(0, 0, 0);
+	hit.t = INFINITY;
+	result = caps(ray, &hit, new_hit, cylinder);
+	if (hit_cylinder_body(ray, cylinder, &op, &hit))
+	{
+		new_hit->hit_point = hit.hit_point;
+		new_hit->normal = hit.normal;
+		result = true;
+	}
+	return (result);
 }

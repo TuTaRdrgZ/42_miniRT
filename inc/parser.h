@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:31:08 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 18:44:10 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 21:05:01 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		check_camera(char **camera, int argc);
 int		check_obj(char **matrix, int argc, int type);
 int		check_normalized_vector(char *str);
 
+int		check_resolution(t_data *data, char **matrix, int argc);
+int		check_ssaa(t_data *data, char **matrix, int argc);
 int		check_light(char **light, int argc);
 int		check_rgb(char *str);
 int		check_coordinates(char *str);

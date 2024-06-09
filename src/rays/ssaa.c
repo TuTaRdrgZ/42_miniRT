@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:55:00 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 18:55:00 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 19:57:18 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static t_vec	calculate_sample_position(t_data *data, t_ssaa *ssaa)
 	float	u_offset;
 	float	v_offset;
 
-	u_offset = ((float)rand() / RAND_MAX) / SSAA;
-	v_offset = ((float)rand() / RAND_MAX) / SSAA;
+	u_offset = ((float)rand() / RAND_MAX) / data->ssaa;
+	v_offset = ((float)rand() / RAND_MAX) / data->ssaa;
 	sample_pos = add_vec(data->vp->pixel00,
 			add_vec(mult_by_scal(data->vp->pixel_delta_u, ssaa->i + (ssaa->k
-						+ u_offset) / SSAA),
+						+ u_offset) / data->ssaa),
 				mult_by_scal(data->vp->pixel_delta_v, ssaa->j + (ssaa->l
-						+ v_offset) / SSAA)));
+						+ v_offset) / data->ssaa)));
 	return (sample_pos);
 }
 
@@ -34,10 +34,10 @@ static void	accumulate_color(t_data *data, t_rgb *total_color, t_ssaa *ssaa)
 	t_hit	hit;
 
 	ssaa->k = 0;
-	while (ssaa->k < SSAA)
+	while (ssaa->k < data->ssaa)
 	{
 		ssaa->l = 0;
-		while (ssaa->l < SSAA)
+		while (ssaa->l < data->ssaa)
 		{
 			sample_pos = calculate_sample_position(data, ssaa);
 			data->ray->direction = subtract_vec(sample_pos,
@@ -76,7 +76,7 @@ void	render_scene_ssaa(void *param)
 
 	data = (t_data *)param;
 	data->ray->origin = data->camera->origin;
-	num_samples = SSAA * SSAA;
+	num_samples = data->ssaa * data->ssaa;
 	ssaa.j = 0;
 	ssaa.k = 0;
 	ssaa.l = 0;

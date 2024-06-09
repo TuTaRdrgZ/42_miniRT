@@ -6,12 +6,13 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 19:35:06 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 19:35:35 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 20:54:15 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "parser.h"
+#include <time.h>
 
 int	calculate_pixel_color(t_rgb color)
 {
@@ -94,7 +95,7 @@ int	main(int argc, char **argv)
 	viewport_init(data.vp, data.camera, data.width, data.height);
 	if (init_mlx(&data))
 		return (EXIT_FAILURE);
-	if (SSAA > 1)
+	if (data.ssaa)
 		render_scene_ssaa(&data);
 	else
 		render_scene(&data);

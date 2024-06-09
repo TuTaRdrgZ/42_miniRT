@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 19:36:57 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 19:41:23 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 21:06:16 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define SP 0
 # define PL 1
 # define CY 2
-
-# define SSAA -1
 
 # define RST "\033[0m"
 # define RED "\033[1;31m"
@@ -67,6 +65,7 @@ typedef struct s_data
 	t_obj		*obj;
 	t_ambient	*ambient;
 	t_light		*light;
+	int			ssaa;
 	int			width;
 	int			height;
 }				t_data;

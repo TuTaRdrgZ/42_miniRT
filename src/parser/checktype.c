@@ -6,20 +6,26 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:32:26 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 18:51:50 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 21:07:42 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 
-int	check_resolution(t_data *data, char **matrix, int argc)
+static int	check_type4(t_data *data, char **matrix)
 {
-	if (argc != 3)
-		return (print_error("Invalid Resolution\n"), KO);
-	data->width = ft_atoi(matrix[1]);
-	data->height = ft_atoi(matrix[2]);
-	return (OK);
+	if (!ft_strcmp(matrix[0], "SSAA"))
+	{
+		if (check_ssaa(data, matrix, arg_counter(matrix)))
+			return (KO);
+		return (OK);
+	}
+	else
+	{
+		printf(RED "Error\nINVALID ID:" RST " \"%s\"\n", matrix[0]);
+		return (KO);
+	}
 }
 
 static int	check_type3(t_data *data, char **matrix)
@@ -44,11 +50,7 @@ static int	check_type3(t_data *data, char **matrix)
 			return (KO);
 		return (OK);
 	}
-	else
-	{
-		printf(RED "Error\nINVALID ID:" RST " \"%s\"\n", matrix[0]);
-		return (KO);
-	}
+	return (check_type4(data, matrix));
 }
 
 static int	check_type2(t_data *data, char **matrix)

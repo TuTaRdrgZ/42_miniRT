@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:07:58 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 18:08:06 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/10 00:11:10 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	apply_lighting(t_hit *hit, t_light light, t_data data)
 	float	cos_angle;
 	float	dot_product;
 
+	light_direction = new_vec(0, 0, 0);
 	light_direction = normalize_vec(subtract_vec(light.coordinates,
 				hit->hit_point));
 	dot_product = dot_prod(hit->normal, light_direction);

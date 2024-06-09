@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:57:45 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 19:56:12 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 23:42:22 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	data_init(t_data *data)
 	data->width = 0;
 	data->height = 0;
 	data->ssaa = 0;
+	data->mlx = NULL;
+	data->image = NULL;
 	data->ray = malloc(sizeof(t_ray));
 	if (!data->ray)
 		exit(EXIT_FAILURE);

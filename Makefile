@@ -68,7 +68,7 @@ CC = cc
 
 # 14_3_FLAG = -mmacosx-version-min=14.3
 WARNING_FLAGS = -Wall -Wextra -Werror -Wno-misleading-indentation -Wno-implicit-fallthrough
-SANITIZE_FLAGS = -g3 -fsanitize=address
+SANITIZE_FLAGS = -g #-fsanitize=address
 DEPENDENCY_FLAGS = -MMD -MP
 INCLUDES = -I inc -I lib/libft -I lib/MLX42
 

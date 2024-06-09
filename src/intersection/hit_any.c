@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:42:26 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 20:45:20 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/09 23:39:24 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ t_hit	hit_any_object(t_obj **obj, t_ray *ray)
 	float	distance;
 
 	closest_distance = INFINITY;
-	closest_hit.did_it_hit = 0;
-	closest_hit.rgb = new_rgb(0, 0, 0);
+	ft_memset(&current_hit, 0, sizeof(t_hit));
+	ft_memset(&closest_hit, 0, sizeof(t_hit));
 	tmp = *obj;
 	while (tmp)
 	{

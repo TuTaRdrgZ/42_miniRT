@@ -6,10 +6,11 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 19:35:06 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 20:54:15 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/10 00:11:16 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "include/MLX42/MLX42.h"
 #include "miniRT.h"
 #include "parser.h"
 #include <time.h>
@@ -103,5 +104,6 @@ int	main(int argc, char **argv)
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	free_data(&data);
+	exit(0);
 	return (0);
 }

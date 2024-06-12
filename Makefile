@@ -58,9 +58,9 @@ DEP_FILES = $(OBJ_ALL:.o=.d)
 
 ########## FLAGS ##########
 
-#MLXFLAGS = -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.4/lib/"		#·reneHome·#
+MLXFLAGS = -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.4/lib/"		#·reneHome·#
 #MLXFLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"		#·rene42·#
-MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/MLX42				#·tuta·#
+#MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm -Ilib/MLX42				#·tuta·#
 
 MLXLIB = lib/MLX42/build/libmlx42.a
 LIBFTLIB = lib/libft/libft.a

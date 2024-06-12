@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:31:41 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/10 00:11:07 by tuta             ###   ########.fr       */
+/*   Updated: 2024/06/12 18:58:55 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,5 @@ void	init_light(t_light *light, char **data)
 			ft_atof(split[2]));
 	ft_free(split);
 	light->ratio = ft_atof(data[2]);
-	split = ft_split(data[3], ',');
-	light->rgb.r = ft_atoi(split[0]);
-	light->rgb.g = ft_atoi(split[1]);
-	light->rgb.b = ft_atoi(split[2]);
 	light->total++;
-	ft_free(split);
 }

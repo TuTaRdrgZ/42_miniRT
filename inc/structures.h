@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:08:13 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/10 00:12:05 by tuta             ###   ########.fr       */
+/*   Updated: 2024/06/12 18:59:13 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_light
 {
 	int				total;
 	double			ratio;
-	t_rgb			rgb;
 	t_vec			coordinates;
 }					t_light;
 

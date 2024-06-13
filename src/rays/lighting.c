@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:07:58 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/10 00:11:10 by tuta             ###   ########.fr       */
+/*   Updated: 2024/06/13 11:33:49 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ void	apply_lighting(t_hit *hit, t_light light, t_data data)
 						* cos_angle)));
 	else
 		hit->rgb = fade_to_shade(hit->rgb, data.ambient->ratio);
-	hit->rgb.r = (hit->rgb.r / 255) * data.ambient->rgb.r * data.ambient->ratio\
-	+ hit->rgb.r * (1 - data.ambient->ratio);
-	hit->rgb.g = (hit->rgb.g / 255) * data.ambient->rgb.g * data.ambient->ratio\
-	+ hit->rgb.g * (1 - data.ambient->ratio);
-	hit->rgb.b = (hit->rgb.b / 255) * data.ambient->rgb.b * data.ambient->ratio\
-	+ hit->rgb.b * (1 - data.ambient->ratio);
+	hit->rgb.r = (hit->rgb.r / 255) * data.ambient->rgb.r * data.ambient->ratio
+		+ hit->rgb.r * (1 - data.ambient->ratio);
+	hit->rgb.g = (hit->rgb.g / 255) * data.ambient->rgb.g * data.ambient->ratio
+		+ hit->rgb.g * (1 - data.ambient->ratio);
+	hit->rgb.b = (hit->rgb.b / 255) * data.ambient->rgb.b * data.ambient->ratio
+		+ hit->rgb.b * (1 - data.ambient->ratio);
 }
-

@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:55:00 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/10 00:10:36 by tuta             ###   ########.fr       */
+/*   Updated: 2024/06/13 11:20:19 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static t_vec	calculate_sample_position(t_data *data, t_ssaa *ssaa)
 	float	u_offset;
 	float	v_offset;
 
-	u_offset = ((float)rand() / RAND_MAX) / data->ssaa;
-	v_offset = ((float)rand() / RAND_MAX) / data->ssaa;
+	u_offset = ((float)rand() / (float)RAND_MAX) / data->ssaa;
+	v_offset = ((float)rand() / (float)RAND_MAX) / data->ssaa;
 	sample_pos = add_vec(data->vp->pixel00,
 			add_vec(mult_by_scal(data->vp->pixel_delta_u, ssaa->i + (ssaa->k
 						+ u_offset) / data->ssaa),

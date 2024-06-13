@@ -83,10 +83,10 @@ int	check_diameter(char *str)
 		return (OK);
 	if (check_dot(str, -1, 0, -1))
 		return (KO);
-	if (ft_atoi(str) <= 0)
-		return (printf(RED "Error\nDiameter/Height cannot be <= 0: %s\n",
+	if (ft_atof(str) < 1)
+		return (printf(RED "Error\nDiameter/Height cannot be < 1: %s\n",
 				str), KO);
-	if (ft_atoi(str) > 1000000)
+	if (ft_atof(str) > 1000000.0)
 		return (printf(RED "Error\nDiameter/Height too high: %s\n",
 				str), KO);
 	return (OK);

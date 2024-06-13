@@ -22,7 +22,7 @@
 # define SP 0
 # define PL 1
 # define CY 2
-# define WIDTH 1920
+# define WIDTH	1920
 # define HEIGHT 1080
 
 # define RST "\033[0m"

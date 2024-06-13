@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:32:21 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 18:52:55 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:47:05 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_sphere(char **sphere)
 {
 	if (check_coordinates(sphere[1]))
 		return (KO);
-	if (check_diameter(sphere[2]) == KO)
+	if (check_diameter(sphere[2]))
 		return (KO);
 	if (check_rgb(sphere[3]))
 		return (KO);
@@ -63,9 +63,9 @@ int	check_cylinder(char **cylinder)
 		return (KO);
 	if (check_normalized_vector(cylinder[2]))
 		return (KO);
-	if (check_diameter(cylinder[3]) < 0)
+	if (check_diameter(cylinder[3]))
 		return (KO);
-	if (check_diameter(cylinder[4]) < 0)
+	if (check_diameter(cylinder[4]))
 		return (KO);
 	if (check_rgb(cylinder[5]))
 		return (KO);

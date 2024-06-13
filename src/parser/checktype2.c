@@ -6,20 +6,11 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:04:07 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 21:07:44 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:02:32 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-int	check_resolution(t_data *data, char **matrix, int argc)
-{
-	if (argc != 3)
-		return (print_error("Invalid Resolution\n"), KO);
-	data->width = ft_atoi(matrix[1]);
-	data->height = ft_atoi(matrix[2]);
-	return (OK);
-}
 
 int	check_ssaa(t_data *data, char **matrix, int argc)
 {

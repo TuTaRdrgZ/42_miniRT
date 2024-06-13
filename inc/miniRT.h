@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 19:36:57 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/10 00:11:01 by tuta             ###   ########.fr       */
+/*   Updated: 2024/06/13 13:28:15 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define SP 0
 # define PL 1
 # define CY 2
+# define WIDTH 1920
+# define HEIGHT 1080
 
 # define RST "\033[0m"
 # define RED "\033[1;31m"

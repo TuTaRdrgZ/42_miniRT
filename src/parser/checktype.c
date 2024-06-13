@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:32:26 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/10 00:10:49 by tuta             ###   ########.fr       */
+/*   Updated: 2024/06/13 11:53:40 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ static int	check_type3(t_data *data, char **matrix)
 		if (check_obj(matrix, arg_counter(matrix), CY))
 			return (KO);
 		init_obj(&(data->obj), matrix, CY);
-		return (OK);
-	}
-	else if (!ft_strcmp(matrix[0], "R"))
-	{
-		if (check_resolution(data, matrix, arg_counter(matrix)))
-			return (KO);
 		return (OK);
 	}
 	return (check_type4(data, matrix));

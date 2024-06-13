@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:57:45 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 23:42:22 by tuta             ###   ########.fr       */
+/*   Updated: 2024/06/13 13:49:52 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,16 @@ void	camera_init(t_camera *camera, char **data)
 	camera->direction = new_vec(ft_atof(split[0]), ft_atof(split[1]),
 			ft_atof(split[2]));
 	ft_free(split);
-	camera->focal_length = 5.1 - (((double)ft_atoi(data[3])) / 36.0);
+	camera->focal_length = pow(10, -0.01508 * (double)ft_atoi(data[3])
+			+ 1.71408);
 	camera->aspect_ratio = 16.0 / 9.0;
 	camera->total++;
 }
 
 void	data_init(t_data *data)
 {
-	data->width = 0;
-	data->height = 0;
+	data->width = WIDTH;
+	data->height = HEIGHT;
 	data->ssaa = 0;
 	data->mlx = NULL;
 	data->image = NULL;

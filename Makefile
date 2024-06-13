@@ -74,7 +74,7 @@ INCLUDES = -I inc -I lib/libft -I lib/MLX42
 
 FLAGS = $(INCLUDES) $(WARNING_FLAGS) $(SANITIZE_FLAGS) $(DEPENDENCY_FLAGS) $(14_3_FLAG)
 
-INC = inc/miniRT.h inc/structures.h #inc/parser.h
+INC = inc/miniRT.h inc/structures.h inc/parser.h
 
 SILENCE = --no-print-directory
 
@@ -97,7 +97,7 @@ $(DIR_BUILD)%.o: $(DIR_SRC)%.c $(INC) Makefile
 $(NAME): $(DIR_BUILD) $(OBJ_ALL) $(INC)
 	@make -C lib/libft/ $(SILENCE)
 	@cmake -S lib/MLX42 -B lib/MLX42/build
-	@make -C lib/MLX42/build
+	@make -C lib/MLX42/build $(SILENCE)
 	@$(CC) $(FLAGS) $(OBJ_ALL) $(LIBFTLIB) $(MLXLIB) $(MLXFLAGS) -o $(NAME)
 	@echo "\n$(YELLOW)miniRT $(RESET)$(CYAN)$(BOLD)created$(RESET)"
 
@@ -105,7 +105,8 @@ clean:
 	@rm -fr $(DIR_BUILD)
 	@rm -f  lib/MLX42/build/CMakeCache.txt
 	@make clean -C lib/libft $(SILENCE)
-	make clean -C lib/MLX42/build
+	@make clean -C lib/MLX42/build $(SILENCE)
+
 
 fclean: clean
 	@rm -f $(NAME)

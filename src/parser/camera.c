@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:31:54 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 18:47:39 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:10:10 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	check_normalized_vector(char *str)
 
 int	check_fov(char *fov)
 {
-	if (ft_atoi(fov) < 0 || ft_atoi(fov) > 180)
-		return (printf(RED "Error\nInvalid FOV [0,180]: %s\n", fov), KO);
+	if (ft_atoi(fov) <= 0 || ft_atoi(fov) > 180)
+		return (printf(RED "Error\nInvalid FOV [1,180]: %s\n", fov), KO);
 	return (OK);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 01:32:50 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/09 18:46:50 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:51:02 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,19 @@ int	check_negative(char *str)
 	return (OK);
 }
 
-float	check_diameter(char *str)
+int	check_diameter(char *str)
 {
 	if (ft_strlen(str) == 1 && ft_isdigit(str[0]))
-		return (ft_atof(str));
+		return (OK);
 	if (check_dot(str, -1, 0, -1))
-		return (-1.0);
-	if (ft_atof(str) < 0)
-		return (printf(RED "Error\nDiameter/Height cannot be negative: %s\n",
-				str), -1.0);
-	return (ft_atof(str));
+		return (KO);
+	if (ft_atoi(str) <= 0)
+		return (printf(RED "Error\nDiameter/Height cannot be <= 0: %s\n",
+				str), KO);
+	if (ft_atoi(str) > 1000000)
+		return (printf(RED "Error\nDiameter/Height too high: %s\n",
+				str), KO);
+	return (OK);
 }
 
 int	check_ratio(char *str)
